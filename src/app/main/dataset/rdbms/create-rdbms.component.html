@@ -1,0 +1,188 @@
+<div [@routerTransition] >
+    <div class="main-portlet">
+        <div class="portlet light portlet-fit portlet-datatable bordered" [style.height.px]="height1">
+            <div class="portlet-title">
+                <div class="caption ">
+                    <img alt="" class="img-box  headimg" src="../../../assets/img/img/RDBMS.svg"> {{pass.isUpdate?"Edit":"Create"}} RDBMS dataset
+                </div>
+                <!--<div class="row">
+
+                    <ul class="nav nav-pills">
+                        <li><a href="#"><label class="numsize"><label style="color:gray">56</label><small style="color:gray">Views</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">106</label><small style="color:gray">Records</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">73</label><small style="color:gray">Edited</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">24</label><small style="color:gray">Explore</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">13</label><small style="color:gray">Types</small></label></a></li>
+                    </ul>
+                </div>-->
+            </div>
+
+
+
+            <form [formGroup]="complexForm" (ngSubmit)="submitForm(complexForm.value)" [style.height.px]="height2">
+                <div class="row">
+                   <img src="../../../assets/global/img/Help.svg" class="helpiconcustm">
+
+                </div>
+                <div class="row">
+                    <label class="col-sm-2" style="text-align: right;margin-top: -10px;"><label class="red-text">*</label> Name :</label>
+                    <div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['name'].valid && complexForm.controls['name'].touched}">
+                        <input type="text" [(ngModel)]="rdbms.entityName" [formControl]="complexForm.controls['name']" placeholder="Enter Name" class="form-control">
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red" *ngIf="complexForm.controls['name'].hasError('required') && complexForm.controls['name'].touched">Required</span>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <label class="col-sm-2" style="text-align: right;margin-top: -10px;"><label class="red-text">*</label> Description :</label>
+                    <div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['description'].valid && complexForm.controls['description'].touched}">
+                        <input class="form-control" type="text" [(ngModel)]="rdbms.entityDescription" [formControl]="complexForm.controls['description']" placeholder="Enter Description">
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red" *ngIf="complexForm.controls['description'].hasError('required') && complexForm.controls['description'].touched">Required</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-sm-2" style="text-align: right;margin-top: -10px;"><label class="red-text">*</label> Driver Selection :</label>
+                    <div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['driver'].valid && complexForm.controls['driver'].touched}">
+                    
+                         <select class="form-control"
+                                 [formControl]="complexForm.controls['driver']"
+                                 [(ngModel)]="rdbms.driverKey"
+                                 (change)="onDriver($event.target.value)">
+                             <option value="" [selected]="true" selected hidden>-Select Driver Selection-</option>
+                             <option  *ngFor="let dr of driverList; let ind=index;"
+                                     [value]="dr.value"
+                                     [selected]="selectedDriver==dr.value">
+                                 {{dr.value}}
+                             </option>
+                         </select>
+                       
+					  <!----------
+                      <select class="form-control" [formControl]="complexForm.controls['driver']"
+                              [(ngModel)]="rdbms.driverKey"
+                              (change)="onDriver($event.target.value)">
+                        <option value="" [selected]="true" selected hidden>-Select Driver Selection-</option>
+                        <option [selected]="selectedDriver==OracleConnection" [value]="OracleConnection">Oracle Connection</option>
+                      </select>
+					------------>
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red" *ngIf="complexForm.controls['driver'].hasError('required') && complexForm.controls['driver'].touched">Required</span>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <label class="col-sm-2" style="text-align: right;margin-top: -10px;"><label class="red-text">*</label> Server Name :</label>
+                    <div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['server'].valid && complexForm.controls['server'].touched}">
+                        <input class="form-control" type="text" [(ngModel)]="rdbms.serverName" [formControl]="complexForm.controls['server']" placeholder="Server Name">
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red" *ngIf="complexForm.controls['server'].hasError('required') && complexForm.controls['server'].touched">Required</span>
+                    </div>
+                </div>
+                <div class="row" *ngIf="isPost||isMySql">
+                    <label class="col-sm-2" style="text-align: right;margin-top: -10px;"><label class="red-text">*</label> Database Name :</label>
+                    <div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['database1'].valid && complexForm.controls['database1'].touched}">
+                        <input class="form-control" type="text" [(ngModel)]="rdbms.databaseName" [formControl]="complexForm.controls['database1']" placeholder="Database Name">
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red" *ngIf="complexForm.controls['database1'].hasError('required') && complexForm.controls['database1'].touched">Required</span>
+                    </div>
+                </div>
+                <div class="row" *ngIf="isOracle">
+                	<div class="row">
+                  <label class="col-sm-2" style="text-align: right;margin-top: -10px;"><label class="red-text">*</label> Database Name :</label>
+                  <div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['database1'].valid && complexForm.controls['database1'].touched}">
+                    <input class="form-control" type="text" [(ngModel)]="rdbms.databaseName" [formControl]="complexForm.controls['database1']" placeholder="Database Name">
+                  </div>
+                  <div class="col-md-3">
+                    <span style="color:red" *ngIf="complexForm.controls['database1'].hasError('required') && complexForm.controls['database1'].touched">Required</span>
+                  </div>
+                  </div>
+                  <div class="row">
+                  <label class="col-sm-2" style="text-align: right;margin-top: -10px;"><label class="red-text">*</label> SID :</label>
+                  <div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['sid'].valid && complexForm.controls['sid'].touched}">
+                    <input class="form-control" type="text" [(ngModel)]="rdbms.sid" [formControl]="complexForm.controls['sid']" placeholder="SID">
+                  </div>
+                  <div class="col-md-3">
+                    <span style="color:red" *ngIf="complexForm.controls['sid'].hasError('required') && complexForm.controls['sid'].touched">Required</span>
+                  </div>
+				</div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2" style="text-align: right;margin-top: -10px;">Username and Password :</label>
+                    <div class="col-md-2">
+                        <input type="submit" data-toggle="collapse" data-target="#login" class="pull-left btn btn-sm btn-yellow" value="Login" [disabled]="!complexForm.valid" />
+
+                    </div>
+                </div>
+                <div class="row collapse out " style="background-color:gainsboro; padding:0px 10px 0px 10px;margin-bottom:12px" id="login">
+                    <br />
+                    <form [formGroup]="loginForm" (ngSubmit)="submitLogin(loginForm.value)">
+                        <div class="row">
+                            <label class="col-sm-2" style="text-align: right;margin-top: -10px;"><label class="red-text">*</label> User Name :</label>
+                            <div class="col-sm-2" [ngClass]="{'has-error':!loginForm.controls['username'].valid && loginForm.controls['username'].touched}">
+                                <input class="form-control" [(ngModel)]="rdbms.userName" type="text" [formControl]="loginForm.controls['username']" />
+                            </div>
+                            <div class="col-md-3">
+                                <span style="color:red" *ngIf="loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched">Required</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2" style="text-align: right;margin-top: -10px;"><label class="red-text">*</label> Password :</label>
+                            <div class="col-sm-2" [ngClass]="{'has-error':!loginForm.controls['password'].valid && loginForm.controls['password'].touched}">
+                                <input class="form-control" [(ngModel)]="rdbms.password" type="password" [formControl]="loginForm.controls['password']">
+                            </div>
+                            <div class="col-md-3">
+                                <span style="color:red" *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Required</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-2" style="text-align: right;margin-top: -10px;"></label>
+                            <div class="col-sm-2" style="width:30%">
+                                <!--<input type="submit" class="pull-right btn btn-sm btn-yellow" data-toggle="collapse" data-target="#login" value="Login" [disabled]="!loginForm.valid" />-->
+                                <input type="submit" class="pull-right btn btn-sm btn-yellow" value="Login" [disabled]="!loginForm.valid" />
+                            </div>
+                            <div class="col-md-2">
+                                <span style="color:red" *ngIf="error">Invalid username or password</span>
+                            </div>
+                        </div>
+
+                    </form>
+                    <br />
+                </div>
+                <div class="row" *ngIf="rdbms.isLogin && !isPost && !isMySql && isOracle">
+                    <label class="col-sm-2" style="text-align: right;margin-top: -10px;"><label class="red-text">*</label> Database Selection :</label>
+                    <div class="col-sm-4">
+                        <select class="form-control" [(ngModel)]="rdbms.databaseName" [formControl]="complexForm.controls['database']" (change)="onData($event.target.value)" autofocus>
+                            <option [selected]="selectedDatabase===''" [value]="">-Select Database-</option>
+                            <option [selected]="selectedDatabase===db" *ngFor="let db of databaseList" [value]="db">{{db}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row" *ngIf="rdbms.isLogin ||isPost||pass.isUpdate">
+                    <div class="col-md-4"></div>
+                    <div class="col-sm-2" (click)="subrdbms()">
+                        <span class="input-group-btn" data-toggle="collapse" data-target="#subdata">
+                            <input type="submit" class="btn btn-yellow" id="username1_checker"/>Add Sub-Dataset
+                            <!--<a href="javascript:;" class="btn btn-yellow" id="username1_checker">
+                                Add Sub-Dataset
+                            </a>-->
+                        </span>
+
+                    </div>
+                </div>
+            </form>
+
+
+            <div class="row backstrip">
+                <button type="button" class="pull-right btn btn-sm btn-yellow" (click)="submit()"> &nbsp; {{pass.isUpdate?"Save":"Create"}} &nbsp; </button>
+            </div>
+        </div>
+    </div>
+</div>

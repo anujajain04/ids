@@ -1,0 +1,156 @@
+
+
+    <div class="portlet light margin-bottom-0" style="width:100%">
+        <div class="row" style="border-bottom:0.5px solid #C7C7C7">
+            <div class="caption" style="margin-left:12px;margin-top:-6px;margin-bottom:17px"><h4 style="font-weight:400">DASHBOARD</h4></div>
+        </div>
+        <div class="row" style="border-bottom: 0.5px solid #C7C7C7;margin-top:25px">
+            <div class="row">
+                <div class="col-xs-3"><input type="text" [(ngModel)]="config.createDashboard.entityName" class="form-control" id="text1" placeholder="Title"></div>
+                <div class="col-xs-3"><input type="text" [(ngModel)]="config.createDashboard.dashboardTitle" class="form-control" id="text2" placeholder="Dashboard Name"></div>
+
+            </div>
+            <div class="row" style="margin-top:20px;margin-bottom:25px">
+                <div class="col-xs-6"><textarea [(ngModel)]="config.createDashboard.entityDescription" class="form-control" rows="3" placeholder="Description"></textarea></div>
+            </div>
+
+        </div>
+
+        <div class="row" style="border-bottom: 0.5px solid #C7C7C7; margin-top: -30px;">
+            <br>
+            <div class="row">
+                <div (click)="onclick($event);" class="col1 col-md-2 dashconfig screendivlayout">
+                    <div>
+                        <img class="layoutscreenimg" src="../../../assets/img/img/layout 1.svg" />
+                    </div>
+                    <div class="textaligndiv"> 
+                        2 Column Regular Dashboard
+                    </div>
+                </div>
+
+                <div (click)="onclick($event);" class="col1 col-md-2 dashconfig screendivlayout">
+                    <div>
+                        <img class="layoutscreenimg" src="../../../assets/img/img/Layout 2.svg" />
+                    </div>   
+                         <div class="textaligndiv"> 
+                            3 Column Multifocused Dashboard 
+                         </div>
+                </div>
+                <div (click)="onclick($event);" class="col1 col-md-2 dashconfig screendivlayout">
+                    <div>
+                        <img class="layoutscreenimg" src="../../../assets/img/img/Layout 3.svg" />
+                    </div>
+                        <div class="textaligndiv">
+                            2 Column Overview Dashboard
+                        </div>    
+                    
+                </div>
+                <div (click)="onclick($event);" class="col1 col-md-2 dashconfig screendivlayout">
+                    <div>
+                        <img class="layoutscreenimg" src="../../../assets/img/img/Layout 4.svg" />
+                    </div>
+                    <div class="textaligndiv">
+                       3 Column Regular Dashboard 
+                    </div>
+                </div>
+                <div (click)="onclick($event);" class="col1 col-md-2 dashconfig screendivlayout">
+                    <div>
+                        <img class="layoutscreenimg" src="../../../assets/img/img/Layout 5.svg" />
+                    </div>
+                    <div class="textaligndiv">
+                        3 Column Focused Dashboard
+                    </div>
+                </div>
+                <div (click)="onclick($event);" class="col1 col-md-2 dashconfig screendivlayout">
+                    <div>
+                        <img class="layoutscreenimg" src="../../../assets/img/img/Layout 6.svg" />
+                    </div>
+                    <div class="textaligndiv">
+                        2 Column Multifocused Dashboard
+                    </div>
+                </div>
+                <div (click)="onclick($event);" class="col1 col-md-2 dashconfig screendivlayout">
+                    <div>
+                        <img class="layoutscreenimg" src="../../../assets/img/img/Layout 7.svg" />
+                    </div>
+                    <div class="textaligndiv">
+                        2 Column Regular Dashboard
+                    </div>
+                </div>
+            <!--</div>
+
+
+            
+            <div class="row">-->
+                <div (click)="onclick($event);" class="col1 col-md-2 dashconfig screendivlayout">
+                    <div>
+                        <img class="layoutscreenimg" src="../../../assets/img/img/Layout 8.svg" />
+                    </div>
+                    <div class="textaligndiv">
+                        2 Column Multifocused Dashboard
+                    </div>
+                </div>
+
+                <div (click)="onclick($event);" class="col1 col-md-2 dashconfig screendivlayout">
+                    <div>
+                        <img class="layoutscreenimg" src="../../../assets/img/img/Layout 9.svg" />
+                    </div>
+                    <div class="textaligndiv">
+                        3 Column Multifocused Dashboard
+                    </div>
+                </div>
+                <div (click)="onclick($event);" class="col1 col-md-2 dashconfig screendivlayout">
+                    <div>
+                        <img class="layoutscreenimg" src="../../../assets/img/img/Layout 10.svg" />
+                    </div>
+                    <div class="textaligndiv">
+                        1 Column Overview Dashboard
+                    </div>
+
+                </div>
+                <div (click)="onclick($event);" class="col1 col-md-2 dashconfig screendivlayout">
+                    <div>
+                        <img class="layoutscreenimg" src="../../../assets/img/img/Layout 11.svg" />
+                    </div>
+                    <div class="textaligndiv">
+                        3 Column Plain <br /> Dashboard
+                    </div>
+                </div>
+                <div (click)="onclick($event);" class="col1 col-md-2 dashconfig screendivlayout">
+                    <div>
+                        <img class="layoutscreenimg" src="../../../assets/img/img/Layout 12.svg" />
+                    </div>
+                    <div class="textaligndiv">
+                        3 Column Multiview Dashboard
+                    </div>
+                </div>
+                <div (click)="onclick($event);" class="col1 col-md-2 dashconfig screendivlayout">
+                    <div>
+                        <img class="layoutscreenimg" src="../../../assets/img/img/Layout 13.svg" />
+                    </div>
+                    <div class="textaligndiv">
+                        2 Column Superview Dashboard
+                    </div>
+                </div>
+                <div (click)="onclick($event);" class="col1 col-md-2 dashconfig screendivlayout">
+                    <div>
+                        <img class="layoutscreenimg" src="../../../assets/img/img/Layout 14.svg" />
+                    </div>
+                    <div class="textaligndiv">
+                        2 Column Megaview Dashboard
+                    </div>
+                </div>
+            </div>
+
+        </div>
+       
+
+    </div>
+
+
+
+
+
+
+
+

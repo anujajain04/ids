@@ -1,0 +1,83 @@
+﻿
+<div class="row">
+  <label for="rt"><b>Model Properties:</b></label>
+  <input type="text" placeholder="Model Name" [(ngModel)]="config.currentModel.entityName" name="rt" class="form-control" />
+</div>
+
+<div class="row">
+  <div><b>Model Type: </b> {{config.currentModel.modelType}}</div>
+</div>
+
+<div class="row">
+  <div><b>Model Selected: </b>{{config.currentModel.entityName}} </div>
+</div>
+
+<!--  <div *ngIf="config.currentModel.definateOprVar">
+    <div class="row">
+        <div class="col-sm-6"><label>Text</label></div>
+        <div class="col-sm-6">
+            <select class="form-control" [(ngModel)]="txt" (ngModelChange)="onCleanseSelect($event)">
+                <option [selected]="txt==f.name" *ngFor="let f of config.currentModel.selectedVariable" [value]="f.name">{{f.name}}</option>
+            </select>
+        </div>
+    </div>
+
+    <!--<div class="row">
+        <div class="col-sm-6"><label>Label</label></div>
+        <div class="col-sm-6">
+            <select class="form-control" [(ngModel)]="txt1" (ngModelChange)="onCleanseSelect1($event)">
+                <option [selected]="txt1==f.name" *ngFor="let f of config.currentModel.selectedVariable" [value]="f.name">{{f.name}}</option>
+            </select>
+        </div>
+    </div>
+</div>-->
+
+<div class="row" *ngIf="config.currentModel.reqOprInputVarNumSelection">
+  <div class="row">
+    <div class="col-sm-6" style="height: 35px;background-color: #e6e6e6;">ModelFields</div>
+    <div class="col-sm-6" style="height: 35px;background-color: #e6e6e6;padding-left:1px">FieldToAnalyze</div>
+  </div>
+  <div><b>Select Fields To Read</b> </div>
+  <div class="row">
+    <div class="col-sm-5" style="height:100px">
+      <select multiple="multiple" #field class="form-control" style="width:100%;height:100%">
+        <option *ngFor="let f of config.currentModel.leftVariables" [value]="f.name">{{f.name}}</option>
+      </select>
+    </div>
+    <div class="col-sm-1" style="padding-left: 0px;text-align: right;height: 100px;margin-top: 12px;">
+      <i class="material-icons hyper-link" (click)="arrowClick(true)">chevron_right</i><br />
+      <i class="material-icons hyper-link" (click)="arrowClick(false)">chevron_left</i>
+    </div>
+    <div class="col-sm-5" style="height:100px">
+      <select multiple="multiple" #selectField class="form-control" style="width:100%;height:100%">
+        <option *ngFor="let f of config.currentModel.rightVariables" [value]="f.name">{{f.name}}</option>
+      </select>
+    </div>
+  </div>
+</div>
+<!-- Code  for dynamic Mapping  -->
+<div>
+  <div class="row" *ngFor="let j of config.currentModel.modelVariable">
+    <div class="col-sm-6"><label>{{j.name}}</label></div>
+    <div class="col-sm-6">
+      <select class="form-control" [(ngModel)]="txt1[j]" (ngModelChange)="onMappingSelect(j,$event)">
+        <option [selected]="txt==f.name" *ngFor="let f of config.currentModel.selectedVariable" [value]="f.name">{{f.name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <!--<div class="row">
+     <div><b>Input Mappings</b> </div>
+     <ul>
+      <li *ngFor="let j of config.currentModel.modelVariable" value ="j.name">{{j.name}}</li>
+      </ul>
+
+        <!--   <label>{{j.name}}</label></div>
+          <select class="form-control" [(ngModel)]="txt" (ngModelChange)="onCleanseSelect($event)">
+              <option [selected]="txt==f.name" *ngFor="let f of config.currentModel.selectedVariable" [value]="f.name">{{f.name}}</option>
+          </select>
+
+       </div>-->
+
+
+</div>

@@ -1,0 +1,91 @@
+<div [@routerTransition]>
+    <div class="main-portlet">
+        <div class="portlet light portlet-fit portlet-datatable" [style.height.px]="height1">
+            <div class="portlet-title">
+                <div class="caption ">
+                    <img alt="" class="img-box  headimg" src="../../../assets/global/img/Twitter color.svg">{{pass.isUpdate?"Edit":"Create"}} Twitter Dataset
+                </div>
+              
+
+
+                <!--<div class="row">
+                    
+                    <ul class="nav nav-pills">
+                        <li><a href="#"><label class="numsize"><label style="color:gray">56</label><small style="color:gray">Views</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">106</label><small style="color:gray">Records</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">73</label><small style="color:gray">Edited</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">24</label><small style="color:gray">Explore</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">13</label><small style="color:gray">Types</small></label></a></li>
+                    </ul>
+                </div>-->
+            </div>
+       
+            <form [formGroup]="complexForm" (ngSubmit)="submitForm(complexForm.value)">
+                <div class="row">
+                    <div class="col-sm-11"><img src="../../../assets/global/img/Help.svg" class="helpiconcustm"></div>
+                    <div class="col-sm-1" style="margin-top:-11px" (click)="tokentwitter()" title="Token For Twitter">
+                        <i class="glyphicon glyphicon-cog helpiconcustm1" ></i>
+                    <!--<img src="../../../assets/global/img/Help.svg" class="helpiconcustm1">-->
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2" style="text-align: right;margin-top: -10px;"><label class="red-text">*</label> About Twitter Dataset :</label>
+                    <div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['name'].valid && complexForm.controls['name'].touched}">
+                        <input class="form-control" [(ngModel)]="twDataset.entityName" type="text" [formControl]="complexForm.controls['name']" name="twitter-name" placeholder="Name">
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red" *ngIf="complexForm.controls['name'].hasError('required') && complexForm.controls['name'].touched">Enter Name</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <label class="col-sm-2" style="text-align: right;margin-top: -10px;"><label class="red-text">*</label> Description :</label>
+                    <div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['description'].valid && complexForm.controls['description'].touched}">
+                        <input class="form-control" [(ngModel)]="twDataset.entityDescription" type="text" [formControl]="complexForm.controls['description']" name="twitter-description" placeholder="Enter Description">
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red" *ngIf="complexForm.controls['description'].hasError('required') && complexForm.controls['description'].touched">Enter Description</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div class="col-sm-4"><input type="submit" [disabled]="!complexForm.valid" value="Add Sub Dataset" class="btn btn-yellow"style="width:120px" ></div>
+                </div>
+               
+                <div class="row">
+                    <div class="col-md-2"><img [src]="!in ? '../../../assets/global/img/dropdown1.svg' : '../../../assets/global/img/edit.svg'" data-toggle="collapse" data-target="#toggleDemo2" style="height: 11px;" />&nbsp; Twitter Sub-Dataset List</div>
+                </div>
+
+                <div class="listscorlbar" style="overflow-y:auto;height:285px">
+                    <div class="row">
+                        <div class="table-responsive collapse out" id="toggleDemo2">
+                            <table class="table table-striped table-hover table-checkable dataTable no-footer" id="datatable_ajax" aria-describedby="datatable_ajax_info"
+                                   role="grid">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="1" colspan="1" width="35%" style="background-color: #F1F1F1;text-align: center;">Sub-Dataset Name</th>
+                                        <th rowspan="1" colspan="1" width="40%" style="background-color: #F1F1F1;text-align: center;">Sub-Dataset Description</th>
+                                        <th rowspan="1" colspan="1" width="25%" style="background-color: #F1F1F1;text-align: center;">Hash Tag</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let sub of twDataset?.subDatasets">
+                                        <td style="text-align: center;"><label>{{sub?.entityName}}</label></td>
+                                        <td style="text-align: center;">{{sub?.entityDescription}}</td>
+                                        <td style="text-align: center;">{{sub?.query}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div *ngIf="isEmpty()" style="text-align: center;">Empty subdataset</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row backstrip footer" >
+                    <button type="button" class="pull-right btn btn-sm btn-yellow" (click)="save()" [disabled]="!complexForm.valid"> &nbsp; {{pass.isUpdate?"Save":"Create"}} &nbsp; </button>
+                </div>
+            </form>
+            
+           
+        </div>
+    </div>
+</div>

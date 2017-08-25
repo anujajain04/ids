@@ -1,0 +1,347 @@
+<div [@routerTransition]>
+    <div class="main-portlet">
+        <div class="portlet light portlet-fit portlet-datatable bordered">
+            <div class="portlet-title">
+                <div class="caption bold" style="margin-top: 10px;margin-bottom: -10px;">
+                    Models
+                </div>
+
+                <!--<div class="row">
+                    <div class="col-md-2"></div>
+                    <ul class="nav nav-pills">
+                        <li><a href="#"><label class="numsize"><label style="color:gray">56</label><small style="color:gray">Views</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">106</label><small style="color:gray">Views</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">73</label><small style="color:gray">Views</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">24</label><small style="color:gray">Views</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">13</label><small style="color:gray">Views</small></label></a></li>
+                    </ul>
+                </div>-->
+
+            </div>
+            <div class="divheader">
+                <span style="padding-left: 30px;padding-right: 20px;">
+                    <input [checked]="isAll()" (change)="selectAll($event)" type="checkbox" />
+                </span>
+               
+
+                <div class="btn-group bootstrap-select bs-select form-control input-small" style="border-left: 1px solid gainsboro;margin-left:8px">
+                    <button type="button" class="btn dropdown-toggle white" (click)="gotocreate()" data-toggle="dropdown collapse" role="button" title="Create New Model" style="width:90px;font-size:11px">
+                        <span class="filter-option pull-left"> Create</span>
+                        <!--<span class="bs-caret"><span class="caret"></span></span>-->
+                    </button>
+                    <!--<div class="dropdown-menu open" role="combobox">
+            <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
+                <li data-original-index="0" (click)="createDataset(i?.type)" *ngFor="let i of datatypes" class="selected" value="{{i?.type}}">
+                    <a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true">
+                        <img [src]="i.getColorIcon()" border="0" alt="" class="smallmenuimg" /> {{i?.type}}
+
+                        <img [src]="createdataset(i?.type) ?i.getcoloricon():i.geticon()" border="0" alt="" class="smallmenuimg" /> {{i?.type}}
+                        <img class="imgwidth" [src]="datasetstage==i.getnumber()? i.getcoloricon():i.geticon()" border="0" alt="" />
+                    </a>
+
+                </li>
+
+            </ul>
+        </div>-->
+
+                </div> 
+                <span class="headspan" *ngIf="deleteModel?.length > 0">
+                    <button type="button" class="btn btn-default buttonheader" data-toggle="collapse" data-target="#copy" style="background-color: white;">
+                        <span class="glyphicon glyphicon-duplicate"></span> Copy
+                    </button>
+                </span>
+                <span class="headspan" *ngIf="deleteModel?.length > 0">
+                    <button type="button" class="btn btn-default buttonheader" data-toggle="collapse" data-target="#move" style="background-color: white;">
+                        <span class="glyphicon glyphicon-log-out"></span> Move
+                    </button>
+                </span>
+                <span class="headspan" *ngIf="deleteModel?.length > 0">
+                    <button type="button" data-toggle="collapse" data-target="#delete" class="btn btn-default buttonheader" style="background-color: white;">
+                        <span class="glyphicon glyphicon-trash"></span> Delete
+                    </button>
+                </span>
+
+
+                <span class="searchspan">
+
+                    <input class="form-control" (keyup)="filter($event.target.value)" type="text" placeholder="Search...">
+
+                </span>
+
+            </div>
+            <hr />
+
+            <!--Delete Option-->
+            <div id="delete" class="collapse out outcollapsecustm">
+
+                <div class="row">
+                    <div style="text-align:-webkit-center;"><b>Sure to delete model?</b></div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span class="input-group-btn" style="float: right" data-toggle="collapse" data-target="#delete">
+                            <a href="javascript:;" class="btn btn-yellow" id="username1_checker">
+                                <i class="fa fa-times"></i> No
+                            </a>
+                        </span>
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="input-group-btn" (click)="yes()" style="float:right" data-toggle="collapse" data-target="#delete">
+                            <a href="javascript:;" class="btn btn-yellow"  id="username1_checker">
+                                <i class="fa fa-check"></i> Yes
+                            </a>
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!--Move Option-->
+
+            <div id="move" class="collapse out outcollapsecustm">
+
+                <div class="row" style="padding-top: 12px;">
+                    <div class="col-md-4"><b>Move To Workspace :</b></div>
+                    <div class="col-sm-4">
+                        <select class="form-control" style="margin-left:13px" [(ngModel)]="selected" (ngModelChange)="selectDataset($event)">
+                            <option *ngFor="let p of workspacelist" [ngValue]="p">{{p.entityName}}</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span class="input-group-btn" style="float: right" data-toggle="collapse" data-target="#move">
+                            <a href="javascript:;" class="btn btn-yellow" id="username1_checker">
+                                <i class="fa fa-times"></i> No
+                            </a>
+                        </span>
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="input-group-btn" style="float:right" (click)="copymoveDataset($event)" data-toggle="collapse" data-target="#move">
+                            <a href="javascript:;" class="btn btn-yellow" id="username1_checker">
+                                <i class="fa fa-check"></i> Yes
+                            </a>
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <!--Copy Option-->
+
+            <div id="copy" class="collapse out outcollapsecustm">
+
+                <div class="row" style="padding-top: 12px;">
+                    <div class="col-md-4"><b>Copy To Workspace :</b></div>
+                    <div class="col-sm-4">
+                        <select class="form-control" style="margin-left:13px" [(ngModel)]="selected" (ngModelChange)="selectDataset($event)">
+                            <option *ngFor="let p of workspacelist" [ngValue]="p">{{p.entityName}}</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span class="input-group-btn" style="float: right" data-toggle="collapse" data-target="#copy">
+                            <a href="javascript:;" class="btn btn-yellow" id="username1_checker">
+                                <i class="fa fa-times"></i> No
+                            </a>
+                        </span>
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="input-group-btn" style="float:right" (click)="copymoveDataset($event)" data-toggle="collapse" data-target="#copy">
+                            <a href="javascript:;" class="btn btn-yellow" id="username1_checker">
+                                <i class="fa fa-check"></i> Yes
+                            </a>
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+            <div class="listscorlbar" id="myGroup">
+                <!--<div class="loader"></div>-->
+
+                <div class="row" *ngFor="let i of filtermodel; let sr=index">
+                    <div class="portlet light portlet-fit portlet-datatable bordered col-sm-2 col-md-2 col-lg-2 divportletcustm" style="margin-top:20px;">
+
+                        <!--<input type="checkbox" [checked]="deleteDataset.indexOf(i) !== -1" (change)="deletedata($event,i)" class="form-control" style="margin-top: 14px;height: 14px;" />-->
+                        <input type="checkbox" [checked]="deleteModel.indexOf(i) !== -1" (change)="deletedata($event,i)" class="form-control" style="margin-top: 14px;height: 14px;" />
+
+                    </div>
+
+
+                    <div class="portlet light portlet-fit portlet-datatable bordered col-md-10" id="portlelightcustm">
+                        <div class="col-sm-1" style="width:2%"></div>
+                        <div class="divlist">
+                            <label style="margin-top:13px"><b>{{i?.entityName}}</b> </label>
+                            <!--<span class="headspan" style="padding-left:60%">
+                                <button data-parent="#myGroup" type="button" (click)="abortModel(i.entityKey)" class="btn btn-default buttonheader111">
+                                    <img src="../../../assets/global/img/Abort Gray.svg" class="listicon1" /> &nbsp; <b style="font-size:10px">Abort</b>
+                                </button>
+                            </span>
+                            <span class="headspan">
+                                <button data-parent="#myGroup" type="button"  class="btn btn-default buttonheader111">
+                                    &nbsp;<b style="font-size:10px">Last Run</b> <br /> 31-02-2017
+                                </button>
+                            </span>
+                            <span class="headspan">
+                                <button data-parent="#myGroup" type="button"  class="btn btn-default buttonheader111">
+                                    &nbsp;<b style="font-size:10px">Last Updated</b> <br />15 min ago
+                                </button>
+                            </span>-->
+                           
+                        </div>
+
+
+                        <!--<div class="row" style="margin-bottom: -33px;">
+                            <div class="col-md-2" style="margin-top: 6px;"><button class="btn btn-success">View Analysis Map</button></div>
+                            <div class="col-md-8 divlist1">{{i?.entityDescription}}</div>
+                        </div>-->
+
+
+                        <div class="divheader3">
+
+                            <!--<span class="headspan">
+                                <button type="button" class="btn btn-default buttonheader2" (click)="algotypelist(i.entityKey)" >
+                                    <img src="../../../assets/global/img/Accuracy.svg" class="listicon1" /> &nbsp;<b style="font-size:10px">Accuracy</b><br /><b>{{math.round(i?.listResult.modelAccuracy)}}%</b>
+                                </button>
+                            </span>-->
+
+                            <!--<span>
+                                <button type="button" class="btn btn-default buttonheader11">
+                                    <img src="../../../assets/global/img/View Dashboard.svg" class="listicon1" /> &nbsp; <b style="font-size:10px">Type</b> <br /><b>{{i.modelType}}</b>
+                                </button>
+                            </span>-->
+                            
+                            <span class="headspan">
+                                <button data-parent="#myGroup" type="button" (click)="getTrainTest(i.entityKey)" class="btn btn-default buttonheader11">
+                                    <img src="../../../assets/global/img/tain test.svg" class="listicon1" /> &nbsp; <b style="font-size:10px">Train Test</b>
+                                </button>
+                            </span>
+                            <span class="headspan">
+                                <button data-parent="#myGroup" type="button"   (click)="Validate(i.entityKey)" class="btn btn-default buttonheader11">
+                                    <img src="../../../assets/global/img/Validate.svg" class="listicon1" /> &nbsp; <b style="font-size:10px">Validate Model</b>
+                                </button>
+                            </span>
+                            <span class="headspan">
+                                <button data-parent="#myGroup" type="button" class="btn btn-default buttonheader11" (click)="goToEdit(i.entityKey)">
+                                    <img src="../../../assets/global/img/edit.svg" class="listicon1" /> &nbsp; <b style="font-size:10px">Edit Model</b>
+                                </button>
+                            </span>
+                            <span class="headspan">
+                                <button data-parent="#myGroup" type="button" data-toggle="collapse" [attr.data-target]="'#'+sr" class="btn btn-default buttonheader11" (click)="getHistory(i.entityKey,sr)">
+                                    <img src="../../../assets/global/img/View History.svg" class="listicon1" /> &nbsp; <b style="font-size:10px">Model History</b>
+                                </button>
+                            </span>
+                            <span class="headspan">
+                                <button data-parent="#myGroup" type="button" data-toggle="collapse" [attr.data-target]="'#'+sr+'p'"  class="btn btn-default buttonheader11">
+                                    <img src="../../../assets/global/img/View Details.svg" class="listicon1" /> &nbsp; <b style="font-size:10px">Model Details</b>
+                                </button>
+                            </span>
+
+                        </div>
+
+                    </div>  
+                    <div id="{{sr}}" class="collapse out outcollapsecustm indent">
+
+                        <div class="row">
+                            <div class="col-md-5" style="margin-top: -20px;"><label class="lblcustm"><b>Model Name: </b>{{i?.entityName}}</label></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5" style="margin-top: -20px;"> <label class="lblcustm"><b>Created Date: </b>{{i?.modelHistory.startDate}}</label></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5" style="margin-top: -20px;"> <label class="lblcustm"><b>Modified Date: </b>{{i?.modelHistory.endDate}}</label></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5" style="margin-top: -20px;"> <label class="lblcustm"><b>Run Status : </b>{{i?.modelHistory.runStatus}}</label></div>
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div id="{{sr+'p'}}" class="collapse out outcollapsecustm indent">
+
+                        <div class="row">
+                            <div class="col-md-5" style="margin-top: -20px;"><label class="lblcustm"><b>Model Name: </b>{{i?.entityName}}</label></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5" style="margin-top: -20px;"> <label class="lblcustm"><b>Entity Type: </b>{{i?.entityType}}</label></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5" style="margin-top: -20px;"> <label class="lblcustm"><b>Entity Description: </b>{{i?.entityDescription}}</label></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5" style="margin-top: -20px;"> <label class="lblcustm"><b>Model Accuracy : </b>{{i.listResult.finalAccuracy*100}}%</label></div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div id="deleteModal" class="modal fade">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" (click)="deleteClick(false)" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Delete</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-horizontal" id='myForm'>
+                                <div class="col-md-7">
+                                    Are you sure to delete?
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div style="float:right">
+                                <button type="button" data-dismiss="modal" (click)="deleteClick(false)" class="btn btn-warning">Cancel</button>
+                                <button type="button" data-dismiss="modal" (click)="deleteClick(true)" class="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--pagination-->
+            <div class="container">
+                <ul class="pagination" style="float:right" id="pager">
+                    <li (click)="previous()"><a><i class="fa fa-angle-left fa-mid"></i></a></li>
+                    <li *ngFor="let p of arr" (click)="changePage(p)" [ngClass]="currentPage==p?'active':'disable'"><a>{{p}}</a></li>
+                    <li (click)="next()"><a><i class="fa fa-angle-right fa-mid"></i></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>

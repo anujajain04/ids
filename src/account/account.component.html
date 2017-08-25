@@ -1,0 +1,31 @@
+<div style="width: 100%;">
+    <div class="logo">
+        <img src="../assets/global/img/iDS white logo.svg" alt="" style="width: 8%;height: 40px;" />
+        <br />
+        <div class="row" style="height: 33px;margin-top: -25px;">
+            <div class="col-sm-1" style="width: 5%;"></div>
+            <label style="color: white;
+                   margin-bottom: 0px;
+                   font-size: 13px;
+                   padding-top: -6px;">IDS Beta, Powered by Inteliment</label>
+        </div>
+        <!--<span>
+            <label>IDS Beta,powered by Inteliment</label>
+        </span>-->
+    </div>
+
+    <!--<div *ngIf="showTenantChange()" class="content tenant-change-box">
+        <tenant-change></tenant-change>
+    </div>-->
+
+    <div class="row" style="background-color: white;">
+        <div class="content account-forms" style="width: 32%;float: left;margin-right: -14px;padding: 163px;margin-left: -130px;padding-right:0px" [style.height.px]="height">
+            <router-outlet></router-outlet>
+        </div>
+
+        <div class="col-sm-8 col-md-8" style="width:68%">
+            <img src="../assets/global/img/login.png" [style.height.px]="height1" style="width: 100%;margin-top: 100px;margin-bottom: 50px;" />
+        </div>
+    </div>
+</div>
+<!--<languageSwitch></languageSwitch>-->

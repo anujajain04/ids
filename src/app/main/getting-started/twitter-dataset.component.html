@@ -1,0 +1,49 @@
+<div [@routerTransition] [style.height.px]="height" >
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-title">
+            <div class="caption font-black-sharp">
+                <span class="caption-subject bold uppercase">Configure Twitter Dataset</span>
+            </div>
+         
+        </div>
+        <form [formGroup]="complexForm" (ngSubmit)="submitForm(complexForm.value)">
+            <div class="custmdivleft">
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <img src="../../../assets/global/img/Help.svg" class="helpiconcustm enbl" title="Help Text Goes Here">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-4 col-sm-4"><label class="red-text">*</label> Name :</div> 
+                    <!--<div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['name'].valid}">-->
+                    <div class="col-sm-4 col-xs-4 col-sm-4" [ngClass]="{'has-error':!complexForm.controls['name'].valid && complexForm.controls['name'].touched}">
+                        <input class="form-control" [(ngModel)]="gsDataset.entityName" [formControl]="complexForm.controls['name']" type="text" placeholder="Enter Name">
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-sm-3">
+                        <span style="color:red" *ngIf="complexForm.controls['name'].hasError('required') && complexForm.controls['name'].touched">Enter Name</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-4 col-sm-4"><label class="red-text">*</label> Description :</div>
+                    <div class="col-sm-4 col-xs-4 col-sm-4" [ngClass]="{'has-error':!complexForm.controls['description'].valid && complexForm.controls['description'].touched}">
+                        <input class="form-control" [(ngModel)]="gsDataset.entityDescription" [formControl]="complexForm.controls['description']" type="text" placeholder="Enter Description">
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-sm-3">
+                        <span style="color:red" *ngIf="complexForm.controls['description'].hasError('required') && complexForm.controls['description'].touched">Enter Description</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-4 col-sm-4"><label class="red-text">*</label> HashTag :</div>
+                    <div class="col-sm-4 col-xs-4 col-sm-4" [ngClass]="{'has-error':!complexForm.controls['tag'].valid && complexForm.controls['tag'].touched}">
+                        <input class="form-control" [value]="getHash()" [formControl]="complexForm.controls['tag']" type="text" placeholder="Enter Hash Tag">
+                    </div>
+                    <div class="col-sm-1"><img src="../../../assets/global/img/Help.svg" class="helpiconcustm enbl" title="Help Text Goes Here" style="float:left"></div>
+                    <div class="col-md-3 col-xs-3 col-sm-3">
+                        <span style="color:red" *ngIf="complexForm.controls['tag'].hasError('required') && complexForm.controls['tag'].touched">Enter Hash Tag</span>
+                    </div>
+                </div>
+            </div>
+        </form>
+     
+    </div>
+</div>

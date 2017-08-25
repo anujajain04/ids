@@ -1,0 +1,20 @@
+branch-defaults:
+  default:
+    environment: idsUi-env
+environment-defaults:
+  idsUi-env:
+    branch: null
+    repository: null
+global:
+  application_name: iDS-UI
+  default_ec2_keyname: iDSApiKey
+  default_platform: arn:aws:elasticbeanstalk:us-east-1::platform/Node.js running on
+    64bit Amazon Linux/4.2.1
+  default_region: us-east-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: eb-cli
+  sc: null
+  workspace_type: Application

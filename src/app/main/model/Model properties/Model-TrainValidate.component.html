@@ -1,0 +1,19 @@
+<div>
+    <div class="row">
+        <!--<div class="col-md-10">-->
+        <label for="rt"><b>{{config.currentTrainValidate.entityKey}} Properties</b></label>
+        <input type="text" placeholder="Enter Task Name" [(ngModel)]="config.currentTrainValidate.entityName" class="form-control" />
+
+        <!--</div>-->
+    </div>
+    <!--  -<div>
+        <div class="row">
+            <div class="col-sm-6"><label>Text</label></div>
+            <div class="col-sm-6">
+                <select class="form-control" [(ngModel)]="txt" (ngModelChange)="onSelect($event)">
+                    <option [selected]="txt==f.name" *ngFor="let f of config.currentTrainValidate.selectedVariable" [value]="f.name">{{f.name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>-->
+</div>

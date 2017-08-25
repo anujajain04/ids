@@ -1,0 +1,172 @@
+﻿<div class="main-portlet">
+    <div class="portlet-body">
+        <div class="row">
+            <div class="col-md-2 studiodiv1 resizable" style="padding-left:0px;width:20%">
+                <div class="customjstree listscorlbar" id="myGroup" [style.height.px]="height">
+                    <!--<gojs-tree></gojs-tree>-->
+                    <!--<div class="col-sm-10"><i class="fa fa-search fa-small"></i><input type="text" class="form-control" style="height: 26px;margin-top: 3px;" placeholder="Search Tasks...." /> </div><hr style="margin-top:34px"/>-->
+                    <!--<div class="input-icon left" style="left:14px">
+                        <i class="icon-magnifier"></i>
+                        <input class="form-control form-control-solid " placeholder="Search" type="text" style="color:#000;background-color: #fff;border: 1px solid #bfbfbf;height: 24px;width:170px">
+                    </div>-->
+                    <!--<hr style="margin-top:-20px;width:96%" />-->
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <div id="jstree" class="jstree jstree-default">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Middle Pane -->
+            <div class="col-md-6 studiodiv2 resizable" style="width:55%">
+                <div class="portlet light" style="height: 673px;margin-top: 1px;">
+                    <div style="margin-top: -20px;margin-left: -12px;">
+                        <span class="caption-subject bold uppercase">{{config.isEdit?"Edit ":"Create "}}Analysis</span>
+                    </div>
+                    <hr style="margin-top:-5px" />
+                    <div class="studiosmalldiv">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <button [disabled]="config.createResult.status_code === -1&&config.analysisRunningStatus&&!config.isEdit" style="border: none;background-color: white;height:40px" (click)="runAnalysis()">
+                                    <img src="../../../assets/global/img/Run Gray.svg" class="listicon1" title="Run Analysis" />&nbsp;
+                                    <span [ngClass]="config.createResult.status_code === 1 &&!config.analysisRunningStatus?'enbl':'disbl'">Run</span>
+                                </button>
+                            </div>
+                            <div class="col-md-2">
+                                <button [disabled]="!config.analysisRunningStatus" style="border: none;background-color: white;height:40px" (click)="abortAnalysis()">
+                                    <img src="../../../assets/global/img/Abort Gray.svg" class="listicon1" title="Abort Analysis" />&nbsp;
+                                    <span [ngClass]="config.createResult.status_code === 1&&config.analysisRunningStatus?'enbl':'disbl'">Abort</span>
+                                </button>
+                            </div>
+                            <div class="col-sm-2">
+                                <span><img src="../../../assets/global/img/Explore Dataset.svg" class="listicon1" (click)="ChartAnalysis()" title="View Chart" /></span>
+                                <span ng-reflect-ng-class="disbl" class="disbl">View Chart</span>
+                            </div>
+                            <div class="col-sm-2">
+                                <span><img style="height:19px;margin-top:2px;" src="../../../assets/img/img/reader dataset.svg" class="listicon1" (click)="TableAnalysis()" title="View Table" /></span>
+                                <span ng-reflect-ng-class="disbl" class="disbl">View Table</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Drop Zone -->
+                    <br />
+                    <!--<div class="drop" style="min-height:20px;background-color: #00ff90;padding: 5px;">
+
+                    </div>-->
+                    <div style="background-color: #eee;margin-left: -20px;margin-right: -20px;">
+
+                        <div id="myDiagramDivContext" class="drop myDiagramDivContext" style="height:476px;padding: 5px;margin-top:-48px"></div>
+
+                    </div>
+                    <!-- Drop Zone end -->
+
+                    <div class="row" style="height: 37px; background: #eee;margin-left: -20px;margin-right: -20px;">
+                        <!--<div class="col-sm-2" style="margin-top: -67px;background: #eee">-->
+                        <button type="button" (click)="validateCreate()" class="pull-right btn btn-sm btn-yellow" style="width:139px;height:26px;margin-top: 6px"> {{this.config.isEdit?"Validate And Update":"Validate And Create"}}</button>
+                        <!--</div>-->
+                    </div>
+                    <div class="row" style="border-top: 1px solid #bfbfbf;margin-left: -20px;background: #eee;margin-right: -20px;height: 81px">
+                        <div>
+                            <div class="row" *ngIf="isProShow||config.isEdit">
+                                <div class="col-sm-2" style="width:8%"></div>
+                                <div>
+                                    <div class="col-sm-10" style="width:75%">
+                                        <div class="clearfix" style="height:38px">
+                                            <span style="font-size:13px">{{runString}}</span>
+                                            <!--<span>Running</span>-->
+                                            <span class="percentage" style="float:right;font-size:13px">{{percetage}}%</span>
+                                        </div>
+                                        <div style="min-height:3px !important" id="myProgress">
+                                            <div style="min-height:3px !important" id="myBar"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="col-sm-2" style="margin-top: -67px;background: #eee">-->
+                            <div class="row" style="margin-top:8px">
+                                <div class="col-sm-4">
+
+                                </div>
+                                <div class="col-sm-2">
+                                    <button type="button" *ngIf="isProShow||config.isEdit" class="pull-right btn btn-sm btn-yellow" data-toggle="modal" data-target="#myModal" (click)="viewlogdetails()" style="height:26px;margin-top: 2px">View Log </button>
+                                </div>
+                            </div>
+                            <!--</div>-->
+                        </div>
+                    </div>
+
+
+                    <div class="container">
+
+                        <div class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Log Details</h4>
+                                    </div>
+                                    <div class="modal-body listscorlbar" id="myGroup" style="height: 360px;overflow-y: auto;">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-hover table-checkable dataTable no-footer" id="datatable_ajax" aria-describedby="datatable_ajax_info"
+                                                       role="grid">
+                                                    <thead>
+                                                        <tr>
+                                                            <th rowspan="1" colspan="1" width="20%" style="background-color:#2B72AB;text-align: center;color: white;">Task Name</th>
+                                                            <th rowspan="1" colspan="1" width="16%" style="background-color:#2B72AB;text-align: center;color: white;">Task Type</th>
+                                                            <th rowspan="1" colspan="1" width="16%" style="background-color:#2B72AB;text-align: center;color: white;">Start Date</th>
+                                                            <th rowspan="1" colspan="1" width="16%" style="background-color:#2B72AB;text-align: center;color: white;">End Date</th>
+                                                            <th rowspan="1" colspan="1" width="16%" style="background-color:#2B72AB;text-align: center; color: white;">Status</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let x of logDetails ; let i=index;">
+                                                            <td rowspan="1" colspan="1" width="20%" style="text-align: center;">{{x.taskName}}</td>
+                                                            <td rowspan="1" colspan="1" width="16%" style="text-align: center;">{{x.taskType}}</td>
+                                                            <td rowspan="1" colspan="1" width="16%" style="text-align: center;">{{x.startDate}}</td>
+                                                            <td rowspan="1" colspan="1" width="16%" style="text-align: center;">{{x.EndDate}}</td>
+                                                            <td rowspan="1" colspan="1" width="16%" style="text-align: center;"><label>{{x.status}}</label></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer backstrip" style="margin-left:0px">
+                                        <button type="button" class="btn btn-yellow" data-dismiss="modal">Done</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Middle Pane end -->
+            <!-- right Pane -->
+            <div class="col-md-2 studiodiv3 resizable" style="width:25%">
+                <div class="portlet light customstudiodiv3 listscorlbar" id="myGroup">
+                    <div class="row">
+                        <input class="form-control" [(ngModel)]="config.finalAnalysis.entityName" type="text" id="analysisName" placeholder="Enter Analysis Name" />
+                    </div>
+                    <div class="row" style="margin-top:5px;">
+                        <textarea class="form-control" [(ngModel)]="config.finalAnalysis.entityDescription" id="analysisDesc" placeholder="Enter Description"></textarea>
+                    </div>
+                    <reader-dataset *ngIf="config.taskType==5"></reader-dataset>
+                    <sampler *ngIf="config.taskType==2"></sampler>
+                    <cleanser *ngIf="config.taskType==1"></cleanser>
+                    <model *ngIf="config.taskType==4"></model>
+                    <function *ngIf="config.taskType==3"></function>
+                    <writer *ngIf="config.taskType==6"></writer>
+                    <blank-pane *ngIf="config.taskType==7"></blank-pane>
+                    <!--<blank-pane *ngIf="config.taskType==7"></blank-pane>-->
+                </div>
+            </div>
+            <!-- right Pane end-->
+        </div>
+    </div>
+</div>

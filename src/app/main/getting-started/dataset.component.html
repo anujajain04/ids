@@ -1,0 +1,99 @@
+<div [@routerTransition]>
+    <!--MAin content-->
+    <div class="main-portlet">
+        <!--1st tab-->
+        <div class="portlet light ">
+            <div style="margin-top: -22px;margin-bottom: 17px;"><span class="caption-subject bold uppercase">Analyse your Data in 3 Steps</span></div>
+            <!-- New Breadcrumb-->
+            <div class="row">
+                <div Class="col-md-3 col-xs-3 col-sm-3 colmd3breadcrumb-active">
+                    <div Class="lblcustmbreadcrumb-active">ACCESS</div>
+                    <div Class="lblbreadcrumbstep-active">STEP</div>
+                    <div Class="lblbreadcrumbnumber1-active">1</div>
+                </div>
+                
+                <div class="col-md-1 col-xs-1"></div>
+
+                <div [ngClass]="stepNumber>1?'col-md-3 col-xs-3 col-sm-3 colmd3breadcrumb-active2':'col-md-3 col-xs-3 col-sm-3 colmd3breadcrumb'">
+                    <div [ngClass]="stepNumber>1?'lblcustmbreadcrumb-active2':'lblcustmbreadcrumb'">ANALYSE</div>
+                    <div [ngClass]="stepNumber>1?'lblbreadcrumbstep-active2':'lblbreadcrumbstep'">STEP</div>
+                    <div [ngClass]="stepNumber>1?'lblbreadcrumbnumber-active2':'lblbreadcrumbnumber2'">2</div>
+
+                </div>
+
+                <div class="col-md-1 col-xs-1"></div>
+
+                <div [ngClass]="stepNumber>2?'col-md-3 col-xs-3 col-sm-3 colmd3breadcrumb-active3':'col-md-3 col-xs-3 col-sm-3 colmd3breadcrumb'">
+                    <div [ngClass]="stepNumber>2?'lblcustmbreadcrumb-active3':'lblcustmbreadcrumb'">ACT</div>
+                    <div [ngClass]="stepNumber>2?'lblbreadcrumbstep-active3':'lblbreadcrumbstep'">STEP</div>
+                    <div [ngClass]="stepNumber>2?'lblbreadcrumbnumber-active3':'lblbreadcrumbnumber'">3</div>
+                </div>
+
+            </div>
+        </div>
+            <!--Breadcrumb End-->
+
+            <br />
+            <!--toggle buttons-->
+        <div class="portlet light " *ngIf="stepNumber!==3" style="margin-top:-50px">
+            <div *ngIf="stepNumber==1" style="margin-top:40px;">
+                <ul class="tab" style="line-height: 1.1;">
+                    <li *ngFor="let i of datatypes">
+                        <a [ngClass]="datasetStage==i.getNumber()?'tabwidth-active':'tabwidth'" (click)="datasetStage = i.getNumber()">
+                          <div><img class="imgwidth" [src]="datasetStage==i.getNumber()? i.getColorIcon():i.getIcon()" border="0" alt="" /></div>
+                            
+                            <div style="margin-top:5px"><span style="width:100%;">{{i.type}}</span></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div *ngIf="stepNumber==2" style="margin-top:40px;">
+                <ul class="tab" style="line-height: 1.1;height:73px">
+                    <li *ngFor="let i of analysistype" [ngClass]="analysisStage==i.getNumber()?'tabwidth1-active':i.getNumber()==1||i.getNumber()==2?'tabwidthdisable':'tabwidth1'">
+                        <a   (click)="analysisClick(i)" style="height:93px" *ngIf="i.getNumber()!==1 && i.getNumber()!==2" [ngClass]="i.getNumber()==1||i.getNumber()==2?'anothover':''">
+                            <div><img class="imgwidth" [src]="analysisStage==i.getNumber()? i.getColorIcon():i.getIcon()" border="0" alt="" /></div>
+                   
+                            <div style="margin-top:5px"><span (click)="analysisClick(i)">{{i.getName()}}</span></div>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <!--1st end-->
+        <!-- Twitter-->
+            <gsmytwitter *ngIf="this.datasetStage==1&&stepNumber==1"></gsmytwitter>
+            <!--twitter end-->
+            <!--Facebook Start-->
+            <gsfb-app *ngIf="this.datasetStage==2&&stepNumber==1"></gsfb-app>
+            <!--Facebook End-->
+            <!--RSS Start-->
+            <gsrss *ngIf="this.datasetStage==3&&stepNumber==1"></gsrss>
+            <!--RSS END-->
+            <!--CSV START-->
+            <gscsv-app *ngIf="this.datasetStage==4&&stepNumber==1"></gscsv-app>
+            <!--CSV END-->
+            <!--excel start-->
+            <gsexcel-app  *ngIf="this.datasetStage==5&&stepNumber==1"></gsexcel-app>
+            <!--excel end-->
+            <!--correlation analysis-->
+            <gscorrelation-app *ngIf="this.analysisStage==4&&stepNumber==2" ></gscorrelation-app>
+            <!--END correlation analysis-->
+            <!--frequrncy analysis-->
+            <gsfrequency-app *ngIf="this.analysisStage==3 &&stepNumber==2"></gsfrequency-app>
+            <!--END Frequency Analysis-->
+            <!--sentiment detection analysis-->
+            <gssentimentdetection-app *ngIf="this.analysisStage==5 &&stepNumber==2"></gssentimentdetection-app>
+            <!--END Sentiment detection analysis-->
+            <!-- Chart -->
+            <chart-root style="margin-top:0px;" *ngIf="stepNumber==3" ></chart-root>
+
+        <div class="row backstrip footer">
+           <div class="col-sm-12">
+               <button type="submit" (click)="validate()" class="pull-right btn btn-sm btn-yellow">{{buttonText}}</button>
+               <button type="submit" (click)="stepNumber=1" *ngIf="stepNumber===2" class="pull-right btn btn-sm btn-yellow" style="margin-right: 20px;">Previous</button>
+           </div>
+        </div>
+    </div>
+</div>

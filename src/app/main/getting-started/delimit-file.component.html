@@ -1,0 +1,91 @@
+<div [@routerTransition] [style.height.px]="height">
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-title">
+            <div class="caption font-black-sharp">
+                <span class="caption-subject bold uppercase">Configure Delimited File Dataset</span>
+            </div>
+
+        </div>
+        <form [formGroup]="complexForm" (ngSubmit)="submitForm(complexForm.value)">
+            <div class="custmdivleft">
+                <div class="row">
+                    <div class="col-sm-12"><img src="../../../assets/global/img/Help.svg" class="helpiconcustm"title="Help Text Goes Here"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-4 col-sm-4"><label class="red-text">*</label> Name :</div>
+                    <!--<div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['name'].valid}">-->
+                    <div class="col-sm-4 col-xs-4 col-sm-4" [ngClass]="{'has-error':!complexForm.controls['name'].valid && complexForm.controls['name'].touched}">
+                        <input class="form-control" [(ngModel)]="gsDataset.entityName" [formControl]="complexForm.controls['name']" type="text" placeholder="Enter Name">
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-sm-3">
+                        <span style="color:red" *ngIf="complexForm.controls['name'].hasError('required') && complexForm.controls['name'].touched">Enter Name</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-4 col-sm-4"><label class="red-text">*</label> Description :</div>
+                    <div class="col-sm-4 col-xs-4 col-sm-4" [ngClass]="{'has-error':!complexForm.controls['description'].valid && complexForm.controls['description'].touched}">
+                        <input class="form-control" [(ngModel)]="gsDataset.entityDescription" [formControl]="complexForm.controls['description']" type="text" placeholder="Enter Description">
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-sm-3">
+                        <span style="color:red" *ngIf="complexForm.controls['description'].hasError('required') && complexForm.controls['description'].touched">Enter Description</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-4 col-sm-4"><label class="red-text">*</label> Delimiter :</div>
+                    <div class="col-sm-4 col-xs-4 col-sm-4">
+                        <select class="form-control" [formControl]="complexForm.controls['delimit']">
+                            <option [selected]="true" selected hidden>-Select Delimiter-</option>
+                            <option [selected]="gsDataset.columnDelimiter==';'" value="';'">SemiColon(;)</option>
+                            <option [selected]="gsDataset.columnDelimiter==','" value="','">comma(,)</option>
+                            <option [selected]="gsDataset.columnDelimiter=='|'" value="'|'">pipe(|)</option>
+                            <option [selected]="gsDataset.columnDelimiter=='tab'" value="'tab'">Tab()</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-sm-3">
+                        <span style="color:red;" *ngIf="(!complexForm.controls['delimit'].valid||!complexForm.controls['delimit'].value) && complexForm.controls['delimit'].touched">Please select delimiter</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-4 col-sm-4">File Path :</div>
+                    <div class="col-md-2 col-xs-2 col-sm-2 radio-item">
+                        <input type="radio" [checked]="true" value="s" [(ngModel)]="container" (change)="change()" [formControl]="complexForm.controls['file']" class="custmradio" id="optradio" name="optradio">
+                        <label for="optradio">Select File</label>
+                    </div>
+                    <div class="col-md-2 col-xs-2 col-sm-2 radio-item">
+                        <input type="radio" (change)="change()" value="e" [(ngModel)]="container" [formControl]="complexForm.controls['file']" class="custmradio" id="optradio1" name="optradio">
+                        <label for="optradio1">Select File Location</label>
+                    </div>
+                </div>
+                <!-- <xlsx-file-upload (uploadedXls)="xlsxUploaded($event)"> {{ uploaderContent | async }} </xlsx-file-upload>-->
+                <div class="row" [ngSwitch]="container">
+                    <div class="col-md-4 col-xs-4 col-sm-4"></div>
+                    <div class="col-md-2 col-xs-2 col-sm-2 row" *ngSwitchCase="'s'">
+                        <div class="col-sm-4" style="width:54.33333%">
+                            <!--<span class="input-group-btn">-->
+                                <input type="file" style="margin-left:10px;height: 33px;" accept=".csv"  class="inputfile input-group-btn" id="file">
+                            <label for="file" class="btn btn-yellow" style="margin-top:-17px;padding:8px;">Choose File</label>
+                            <!--</span>-->
+                        </div>
+                        <div class="col-sm-2 col-xs-2 col-sm-2" style="margin-top:-8px;">
+                            <button type="button" class="btn btn-yellow" style="margin-left:173px"
+                                    (click)="onUploadClick()" >
+                                Upload
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="row" *ngSwitchCase="'e'">
+                        <div class="col-md-2 col-xs-2 col-sm-2" >
+                            <input class="form-control" (blur)="onBlurMethod($event.target.value)" [formControl]="complexForm.controls['enterFile']" type="text" placeholder="Enter File Path">
+
+                        </div>
+
+                        <div class="col-md-2 col-xs-2 col-sm-2" style="margin-left:165px;margin-top:-10px">
+                            <span style="color:red;margin-left:-181px;" *ngIf="!filePath && complexForm.controls['enterFile'].touched ">Please select valid path</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

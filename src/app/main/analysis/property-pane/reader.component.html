@@ -1,0 +1,44 @@
+﻿<form>
+    <div> <b>Reader Dataset Properties</b></div>
+
+    <div class="row">
+        <!--<div class="col-md-10">-->
+        <label for="rt">Task Name:</label>
+        <input type="text" class="form-control" [(ngModel)]="config.currentReader.subDatasets[0].entityName" placeholder="Reader Task 1" name="rt" />
+
+        <!--</div>-->
+    </div>
+    <div class="row">
+        <div class="col-sm-4"><b> Dataset : </b></div><div class="col-sm-7">{{config.currentReader.entityName}}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6"><b>Sub Dataset : </b></div><div class="col-sm-6">{{config.currentReader.subDatasets[0].entityName}}</div>
+    </div>
+    <div class="row" *ngIf="config.currentReader.reqOprInputVarNumSelection">
+        <div><b>Select Fields To Read</b> </div>
+        <div class="row">
+            <div class="col-sm-5" style="height:100px">
+                <select multiple="multiple" #field class="form-control" style="width:100%;height:100%">
+                    <option *ngFor="let f of config.currentReader.leftVariables" [value]="f.name">{{f.name}}</option>
+                </select>
+            </div>
+            <div class="col-sm-1" style="padding-left: 0px;text-align: right;height: 100px;margin-top: 12px;">
+                <i class="material-icons hyper-link" (click)="arrowClick(true)">chevron_right</i><br />
+                <i class="material-icons hyper-link" (click)="arrowClick(false)">chevron_left</i>
+            </div>
+            <div class="col-sm-5" style="height:100px">
+                <select multiple="multiple" #selectField class="form-control" style="width:100%;height:100%">
+                    <option *ngFor="let f of config.currentReader.rightVariables" [value]="f.name">{{f.name}}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="config.currentReader.definateOprVar">
+        <div class="col-sm-6"><label>Text</label></div>
+        <div class="col-sm-6">
+            <select class="form-control" [(ngModel)]="txt" (ngModelChange)="onCleanseSelect($event)">
+                <option [selected]="txt==f.name" *ngFor="let f of config.currentReader.selectedVariable" [value]="f.name">{{f.name}}</option>
+            </select>
+        </div>
+    </div>
+</form>

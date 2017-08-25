@@ -1,0 +1,16 @@
+﻿<div class="main-portlet">
+
+    <home-dash *ngIf="stepNumber==1"></home-dash>
+    <!--<dash-title-config *ngIf="stepNumber==2" [name1]="helloName"></dash-title-config>-->
+
+
+     <div class="row">
+        <div class="col-md-2 col-md-offset-10">
+            <div *ngIf="errorMassege" style="color:red;float:left;margin-left:-90px;margin-top:-12px;">select Atleast one layout</div>
+            <button class="pull-right btn btn-sm btn-yellow" type="button" style="height:30px;width:50%" (click)="gotoTitle()">Next</button>
+        </div>
+    </div>
+</div>
+
+
+

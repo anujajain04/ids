@@ -1,0 +1,14 @@
+﻿
+<!--<ol class="page-breadcrumb" style="margin-left: 120px;">
+    <li *ngFor="let breadcrumb of breadcrumbs">
+        <span class="breadcrumb">Studio   <i class="fa fa-angle-right fa-mid" style="color:white"> </i> </span>
+        <a class="breadcrumb" style="font-weight: 600;"  [routerLink]="[breadcrumb.url, breadcrumb.params]">{{breadcrumb.label}} </a>
+    </li>
+</ol>-->
+<ol class="breadcrumb" style="margin-left: 140px;">
+    <li><a routerLink="" class="breadcrumb" style="color:white;">Studio</a></li>
+    <li *ngFor="let breadcrumb of breadcrumbs">
+        <i class="fa fa-angle-right fa-mid" style="color:white"></i>
+        <a [routerLink]="[breadcrumb.url, breadcrumb.params]" style="color:white;">{{ breadcrumb.label }}</a>
+    </li>
+</ol>

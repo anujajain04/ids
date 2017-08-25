@@ -1,0 +1,199 @@
+<div class="page-sidebar navbar-collapse collapse ng-scope " style="padding-bottom: 12%;position: fixed;z-index:10">
+    <!-- BEGIN SIDEBAR MENU -->
+    <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+    <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+    <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+    <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+    <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+    <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+
+    <ul class="page-sidebar-menu" id="nav" [style.height.px]="height" data-spy="spyscroll" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
+
+
+
+        <li style="height:20px"></li>
+        <!--<div class="input-icon left">
+          <i class="icon-magnifier"></i>
+          <input class="form-control form-control-solid " placeholder="Search" type="text" style="color:#fdfdfd;background-color: #1c1c1c;">
+        </div>-->
+
+
+
+
+        <template ngFor let-menuItem [ngForOf]="workspace.menu.items" let-mainMenuItemIndex="index">
+            <!--NOTE THAT-->
+            <!-- *ngIf="showMenuItem(menuItem)" this attribute is removed from first following li -->
+            <input type="text" class="form-control" *ngIf="mainMenuItemIndex==-1" />
+
+            <li [ngClass]="{'start': mainMenuItemIndex == 0}" *ngIf="showMenuItem(menuItem)" (click)="checkindex(mainMenuItemIndex,$event)">
+                <a [routerLink]="[menuItem.route]" *ngIf="!menuItem.items.length" [ngClass]="mainMenuItemIndex==i?'menuselected-active':'menuselected'" style="height: 30px;margin-top: 4px;">
+                    <img src={{menuItem.icon}} class="sidebaricon-deactive" />
+                    <!--<img src="{{mainMenuItemIndex==-1?'menuItem.icon':'menuItem.icon1'}}" />-->
+                    <!--[ngClass]="mainMenuItemIndex==-1?'sidebaricon-active':'sidebaricon-deactive'"/>-->
+                    <span class="title">{{l(menuItem.name)}}</span>
+                    <!--<span><i *ngIf="mainMenuItemIndex==1" style="height:25px;margin-top:11px;float:right;margin-left:44px" class="fa fa-plus"></i></span>-->
+                </a>
+                <a href="javascript:;" class="auto" *ngIf="menuItem.items.length" style="height:34px">
+                    <img src={{menuItem.icon}} style="min-height:50px;min-height:34px;" class="sidebaricon-deactive" />
+                    <span class="title" id="{{l(menuItem.name)}}" style="width:120%;margin-left:-44px;">{{l(menuItem.name)}}</span>
+                    <span><i *ngIf="mainMenuItemIndex==1" style="height:25px;margin-top:11px;float:right;margin-left:44px" class="fa fa-plus"></i></span>
+
+                </a>
+               
+                <ul class="sub-menu" id="List" *ngIf="menuItem.items.length">
+                    <!-- Menu Level 2 -->
+                    <template ngFor let-childMenuItem [ngForOf]="menuItem.items" let-mainMenuItemIndex="index">
+                        <li *ngIf="showMenuItem(childMenuItem)" (click)="selected(mainMenuItemIndex)" routerLinkActive="active" id="listNum{{mainMenuItemIndex}}" class="listCount" style="height:45px;padding:10px;margin-left:-45px">
+                            <div style="float:left;width:75%;margin-top:-10px;margin-left:15px;" (click)="showWorkspace(childMenuItem.key,childMenuItem.name)">
+                                                            <a [routerLink]="[childMenuItem.route]" *ngIf="!childMenuItem.items.length" style="height:43px;width:100%;color:black;">
+
+                                <span class="title">{{l(childMenuItem.name)}}</span>
+                              
+
+                            </a>
+                                </div>
+                            <div *ngIf="l(childMenuItem.name)!=='Create WorkSpace'" style="width:10%;float:left;margin-top:-10px;" (click)="draw(mainMenuItemIndex,$event)">
+                                <span style="height:15px;width:15px;cursor:pointer"><b>...</b></span>
+
+                            </div>
+                            <div class="listItem" style="height:150px;margin-left:183px;display:none;" id="draw{{mainMenuItemIndex}}">
+                                <ul style="background-color:gray;width:203px;margin-top:20px;" id="ListItems{{mainMenuItemIndex}}">
+                                    <!--<li style="margin-top:11px">
+                <a href="javascript:;"><i class="fa fa-user-plus"></i> View Account Option</a>
+            </li>-->
+                                    <li style="margin-top:5px;height:23px;cursor:pointer;" (click)="editWorkspace($event,childMenuItem)">
+                                        Edit
+                                    </li>
+                                    <li style="margin-top:5px;cursor:pointer;" (click)="deleteWorkspace($event,childMenuItem)">
+                                        Delete
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <a href="javascript:;" class="auto" *ngIf="childMenuItem.items.length">
+
+                                <span class="title">{{l(childMenuItem.name)}}</span>
+                                <span class="arrow "></span>
+                        
+                            </a>
+                           
+                             
+                               
+
+                         
+                            <ul class="sub-menu" *ngIf="childMenuItem.items.length">
+                                <!-- Menu Level 3 -->
+                                <template ngFor let-childOfChildMenuItem [ngForOf]="childMenuItem.items" let-childOfChildMenuItemIndex="index">
+                                    <li *ngIf="showMenuItem(childOfChildMenuItem)" routerLinkActive="active" [ngClass]="{'start': childOfChildMenuItemIndex == 0}">
+                                        <a [routerLink]="[childOfChildMenuItem.route]" *ngIf="!childOfChildMenuItem.items.length">
+                                            <img src={{childOfChildMenuItem.icon}} class="sidebaricon" />
+                                            <span class="title">{{l(childOfChildMenuItem.name)}}</span>
+                                        </a>
+                                        <a href="javascript:;" class="auto" *ngIf="childOfChildMenuItem.items.length">
+                                            <img src={{childOfChildMenuItem.icon}} class="sidebaricon" />
+                                            <span class="title">{{l(childOfChildMenuItem.name)}}</span>
+                                           
+                                            <span class="arrow "></span>
+                                        </a>
+                                        <ul class="sub-menu" *ngIf="childOfChildMenuItem.items.length">
+                                            <!-- Menu Level 4 -->
+                                            <template ngFor let-childOfChildOfChildMenuItem [ngForOf]="childOfChildMenuItem.items" let-childOfChildMenuItemIndex="index">
+                                                <li *ngIf="showMenuItem(childOfChildOfChildMenuItem)" routerLinkActive="active" [ngClass]="{'start': childOfChildMenuItemIndex == 0}">
+                                                    <a [routerLink]="[childOfChildOfChildMenuItem.route]">
+                                                        <img src={{childOfChildOfChildMenuItem.icon}} class="sidebaricon" />
+                                                        <span class="title">{{l(childOfChildOfChildMenuItem.name)}}</span>
+                                                    </a>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </li>
+                                </template>
+                            </ul>
+                        </li>
+                    </template>
+                </ul>
+                <hr class="custmhr" *ngIf="mainMenuItemIndex == 0" />
+
+            </li>
+
+
+
+        </template>
+    </ul>
+
+
+
+    <ul class="page-sidebar-menu " id="nav" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200"
+        ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
+        <template ngFor let-menuItem [ngForOf]="lowermenu.items" let-mainMenuItemIndex="index">
+            <!--NOTE THAT-->
+            <!-- *ngIf="showMenuItem(menuItem)" this attribute is removed from first following li -->
+            <input type="text" class="form-control" *ngIf="mainMenuItemIndex==-1" />
+            <li *ngIf="showMenuItem(menuItem)" (click)="checkindex2(mainMenuItemIndex)">
+                <a [routerLink]="[menuItem.route]" *ngIf="!menuItem.items.length" style="height: 30px;margin-top: 4px;" [ngClass]="mainMenuItemIndex==j?'menuselected-active':'menuselected'">
+                    <img src={{menuItem.icon}} class="sidebaricon-deactive" />
+                    <span class="title">{{l(menuItem.name)}}</span>
+                </a>
+                <a href="javascript:;" class="auto" *ngIf="menuItem.items.length">
+                    <img src={{menuItem.icon}} class="sidebaricon-deactive" />
+                    <span class="title">{{l(menuItem.name)}}</span>
+
+                </a>
+
+                <ul class="sub-menu" *ngIf="menuItem.items.length">
+                    <!-- Menu Level 2 -->
+                    <template ngFor let-childMenuItem [ngForOf]="menuItem.items" let-mainMenuItemIndex="index">
+                        <li *ngIf="showMenuItem(childMenuItem)" routerLinkActive="active" [ngClass]="{'start': childMenuItemIndex == 0}">
+                            <a [routerLink]="[childMenuItem.route]" *ngIf="!childMenuItem.items.length">
+
+                                <span class="title">{{l(childMenuItem.name)}}</span>
+                            </a>
+                            <a href="javascript:;" class="auto" *ngIf="childMenuItem.items.length">
+
+                                <span class="title">{{l(childMenuItem.name)}}</span>
+                                <span class="arrow "></span>
+                            </a>
+
+                            <ul class="sub-menu" *ngIf="childMenuItem.items.length">
+                                <!-- Menu Level 3 -->
+                                <template ngFor let-childOfChildMenuItem [ngForOf]="childMenuItem.items" let-childOfChildMenuItemIndex="index">
+                                    <li *ngIf="showMenuItem(childOfChildMenuItem)" routerLinkActive="active" [ngClass]="{'start': childOfChildMenuItemIndex == 0}">
+                                        <a [routerLink]="[childOfChildMenuItem.route]" *ngIf="!childOfChildMenuItem.items.length">
+                                            <img src={{childOfChildMenuItem.icon}} class="sidebaricon" />
+                                            <span class="title">{{l(childOfChildMenuItem.name)}}</span>
+                                        </a>
+                                        <a href="javascript:;" class="auto" *ngIf="childOfChildMenuItem.items.length">
+                                            <img src={{childOfChildMenuItem.icon}} class="sidebaricon" />
+                                            <span class="title">{{l(childOfChildMenuItem.name)}}</span>
+                                            <span class="arrow "></span>
+                                        </a>
+                                        <ul class="sub-menu" *ngIf="childOfChildMenuItem.items.length">
+                                            <!-- Menu Level 4 -->
+                                            <template ngFor let-childOfChildOfChildMenuItem [ngForOf]="childOfChildMenuItem.items" let-childOfChildMenuItemIndex="index">
+                                                <li *ngIf="showMenuItem(childOfChildOfChildMenuItem)" routerLinkActive="active" [ngClass]="{'start': childOfChildMenuItemIndex == 0}">
+                                                    <a [routerLink]="[childOfChildOfChildMenuItem.route]">
+                                                        <img src={{childOfChildOfChildMenuItem.icon}} class="sidebaricon" />
+                                                        <span class="title">{{l(childOfChildOfChildMenuItem.name)}}</span>
+                                                    </a>
+                                                </li>
+                                            </template>
+                                        </ul>
+                                    </li>
+                                </template>
+                            </ul>
+                        </li>
+                    </template>
+                </ul>
+
+            </li>
+
+
+
+        </template>
+
+
+
+    </ul>
+    <!-- END SIDEBAR MENU -->
+    <div></div>
+</div>

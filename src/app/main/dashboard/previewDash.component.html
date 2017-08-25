@@ -1,0 +1,748 @@
+<div [@routerTransition]>
+    <div class="main-portlet" style="height:850px">
+
+        <!-- *****************Dahsboard Start************** -->
+        <!-- *****************Dahsboard1************** -->
+        <div> <h5 style="text-transform:uppercase;font-family:Aller">{{dashtitle}}</h5> </div>
+        <div id="DashboardContainer" *ngIf="isLoad  && name1==0"  class="row ttlconfigrowdiv" style="background-color:#E6E6E6;height:850px">
+        	<button class="pull-right btn btn-sm btn-yellow" (click)="reset()" type="button" style="height:30px;width:90px">Reset</button>
+            <div id="draggable1" class="col-md-5 ttlconfigdivlayout" style="width:40%;height:40%">
+                <label> {{layname[0]}}</label>
+                <!--  <word-cloud *ngIf="dashboard.chartWidgets[0].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="1" [Stats]="chartData[0]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[0].type === 2" [charWidgetLocation]="1" [Stats]="chartData[0]">Loading...</pie-chart>
+                <chord-chart *ngIf="dashboard.chartWidgets[0].type === 3" [charWidgetLocation]="1" [Stats]="chartData[0]"></chord-chart>
+                -->
+                <pie-chart *ngIf="chartVisualizationType[0]=='Pie Chart' " [charWidgetLocation]="chartWidgetLocationArray[0]" [Stats]="chartMetaDataArray[0]" (childData)='handleEvent($event)' (pieChildData)='handleEvent($event)'>Loading...</pie-chart>
+                <donut-chart *ngIf="chartVisualizationType[0]=='Donut Chart' " [charWidgetLocation]="chartWidgetLocationArray[0]" [Stats]="chartMetaDataArray[0]" [chartData]= "chartDataArray[dashboard.chartWidgets[0].chartWidgetName]" (donutChildData)='handleEvent($event)'></donut-chart>
+                <!--<word-cloud *ngIf="chartVisualizationType[0]=='Word Cloud'" [charWidgetLocation]="chartWidgetLocationArray[0]" [Stats]="chartMetaDataArray[0]" [chartData]= "wordData" [selectedChartName]="selectedChartName" (childData)='handleEvent($event)'></word-cloud>-->
+                 <word-cloud *ngIf="chartVisualizationType[0]=='Word Cloud'" [charWidgetLocation]="chartWidgetLocationArray[0]" [selectedChartName]="selectedChartName" [Stats]="chartMetaDataArray[0]" [chartData]= "chartDataArray[dashboard.chartWidgets[0].chartWidgetName]" (childData)='handleEvent($event)'></word-cloud> 
+                <chord-chart *ngIf="chartVisualizationType[0]=='Chord Chart'"[charWidgetLocation]="chartWidgetLocationArray[0]" [Stats]="chartMetaDataArray[0]" [chartData]= "chartDataArray[dashboard.chartWidgets[0].chartWidgetName]"></chord-chart>
+                <bar-chart *ngIf="chartVisualizationType[0]=='Bar Chart'" [charWidgetLocation]="chartWidgetLocationArray[0]" [Stats]="chartMetaDataArray[0]" [chartData]= "chartDataArray[dashboard.chartWidgets[0].chartWidgetName]"></bar-chart>
+            </div>
+            <div id="draggable2" class="col-md-5 ttlconfigdivlayout" style="width:40%;height:40%">
+                <label> {{layname[1]}}</label>
+                <!--<word-cloud *ngIf="dashboard.chartWidgets[1].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="2" [Stats]="chartData[1]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[1].type === 2" [charWidgetLocation]="2" [Stats]="chartData[1]">Loading...</pie-chart>
+                <donut-chart *ngIf="dashboard.chartWidgets[1].type === 3" [charWidgetLocation]="2" [Stats]="chartData[1]"></donut-chart>
+                <bar-chart *ngIf="dashboard.chartWidgets[1].type === 4" [charWidgetLocation]="2" [Stats]="chartData[1]"></bar-chart>
+				-->
+				<pie-chart *ngIf="chartVisualizationType[1]=='Pie Chart' " [charWidgetLocation]="chartWidgetLocationArray[1]" [Stats]="chartDataArray[1]" [chartData]= "chartDataArray[dashboard.chartWidgets[1].chartWidgetName]"  (pieChildData)='handleEvent($event)'>Loading...</pie-chart>
+                <donut-chart *ngIf="chartVisualizationType[1]=='Donut Chart' " [charWidgetLocation]="chartWidgetLocationArray[1]" [Stats]="chartMetaDataArray[1]" [chartData]= "chartDataArray[dashboard.chartWidgets[1].chartWidgetName]" (donutChildData)='handleEvent($event)'></donut-chart>
+                <word-cloud *ngIf="chartVisualizationType[1]=='Word Cloud'" [charWidgetLocation]="chartWidgetLocationArray[1]" [selectedChartName]="selectedChartName" [Stats]="chartMetaDataArray[1]" [chartData]= "chartDataArray[dashboard.chartWidgets[1].chartWidgetName]" (childData)='handleEvent($event)'></word-cloud>
+                <chord-chart *ngIf="chartVisualizationType[1]=='Chord Chart'"[charWidgetLocation]="chartWidgetLocationArray[1]" [Stats]="chartDataArray[1]" [chartData]= "chartDataArray[dashboard.chartWidgets[1].chartWidgetName]"></chord-chart>
+                <bar-chart *ngIf="chartVisualizationType[1]=='Bar Chart'" [charWidgetLocation]="chartWidgetLocationArray[1]" [Stats]="chartDataArray[1]" [chartData]= "chartDataArray[dashboard.chartWidgets[1].chartWidgetName]"></bar-chart>
+                          
+            </div>
+            <div  id="draggable3" class="col-md-5 ttlconfigdivlayout" style="width:40%;height:40%">
+                <!--<word-cloud *ngIf="dashboard.chartWidgets[2].type=== 3" style="height:200px;width:200px;" [charWidgetLocation]="3" [frequency_list]="chartData[2]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[2].type === 2" [charWidgetLocation]="3" [Stats]="chartData[2]">Loading...</pie-chart>
+                <chord-chart *ngIf="dashboard.chartWidgets[2].type === 1" [charWidgetLocation]="3" [Stats]="chartData[2]"></chord-chart>-->
+                
+                <pie-chart *ngIf="chartVisualizationType[2]=='Pie Chart' " [charWidgetLocation]="chartWidgetLocationArray[2]" [Stats]="chartDataArray[2]" [chartData]= "chartDataArray[dashboard.chartWidgets[2].chartWidgetName]" (pieChildData)='handleEvent($event)'>Loading...</pie-chart>
+                <donut-chart *ngIf="chartVisualizationType[2]=='Donut Chart' " [charWidgetLocation]="chartWidgetLocationArray[2]" [Stats]="chartDataArray[2]" [chartData]= "chartDataArray[dashboard.chartWidgets[2].chartWidgetName]" (donutChildData)='handleEvent($event)'></donut-chart>
+                <word-cloud *ngIf="chartVisualizationType[2]=='Word Cloud'" [charWidgetLocation]="chartWidgetLocationArray[2]" [selectedChartName]="selectedChartName" [Stats]="chartMetaDataArray[2]" [chartData]= "chartDataArray[dashboard.chartWidgets[2].chartWidgetName]" (childData)='handleEvent($event)'></word-cloud>
+                <chord-chart *ngIf="chartVisualizationType[2]=='Chord Chart'"[charWidgetLocation]="chartWidgetLocationArray[2]" [Stats]="chartDataArray[2]" [chartData]= "chartDataArray[dashboard.chartWidgets[2].chartWidgetName]"></chord-chart>
+                <bar-chart *ngIf="chartVisualizationType[2]=='Bar Chart'" [charWidgetLocation]="chartWidgetLocationArray[2]" [Stats]="chartDataArray[2]" [chartData]= "chartDataArray[dashboard.chartWidgets[2].chartWidgetName]"></bar-chart>
+                        
+            </div>
+            <div  id="draggable4" class="col-md-5 ttlconfigdivlayout" style="width:40%;height:40%">
+                <!--<word-cloud *ngIf="dashboard.chartWidgets[3].type=== 3" style="height:200px;width:200px;" [charWidgetLocation]="4" [frequency_list]="chartData[3]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[3].type === 2" [charWidgetLocation]="4" [Stats]="chartData[3]">Loading...</pie-chart>
+                <bar-chart *ngIf="dashboard.chartWidgets[3].type === 1" [charWidgetLocation]="4" [Stats]="chartData[3]"></bar-chart>-->
+                
+                <pie-chart *ngIf="chartVisualizationType[3]=='Pie Chart' " [charWidgetLocation]="chartWidgetLocationArray[3]" [Stats]="chartDataArray[3]" [chartData]= "chartDataArray[dashboard.chartWidgets[3].chartWidgetName]" (pieChildData)='handleEvent($event)'>Loading...</pie-chart>
+                <donut-chart *ngIf="chartVisualizationType[3]=='Donut Chart' " [charWidgetLocation]="chartWidgetLocationArray[3]" [Stats]="chartDataArray[3]" [chartData]= "chartDataArray[dashboard.chartWidgets[3].chartWidgetName]" (donutChildData)='handleEvent($event)'></donut-chart>
+                <word-cloud *ngIf="chartVisualizationType[3]=='Word Cloud'" [charWidgetLocation]="chartWidgetLocationArray[3]" [selectedChartName]="selectedChartName" [Stats]="chartMetaDataArray[3]" [chartData]= "chartDataArray[dashboard.chartWidgets[3].chartWidgetName]" (childData)='handleEvent($event)'></word-cloud>
+                <chord-chart *ngIf="chartVisualizationType[3]=='Chord Chart'"[charWidgetLocation]="chartWidgetLocationArray[3]" [Stats]="chartDataArray[3]" [chartData]= "chartDataArray[dashboard.chartWidgets[3].chartWidgetName]"></chord-chart>
+                <bar-chart *ngIf="chartVisualizationType[3]=='Bar Chart'" [charWidgetLocation]="chartWidgetLocationArray[3]" [Stats]="chartDataArray[3]" [chartData]= "chartDataArray[dashboard.chartWidgets[3].chartWidgetName]"></bar-chart>
+           
+            </div>
+            	
+        </div>
+
+        <!-- *****************Dahsboard2************** -->
+		 <!--
+        <div id="DashboardContainer" *ngIf="isLoad && name1==1" class="row ttlconfigrowdiv" style="background-color:#E6E6E6;height:100%;">
+            <div class="container" style="height:100%">
+                <div class="row" style="height:50%">
+                    <div (click)="onclick($event,0);" id="draggable1" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:100%; width: 33%; margin-top: 25px;">
+                        <word-cloud *ngIf="dashboard.chartWidgets[0].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="1" [Stats]="chartData[0]"></word-cloud>
+                        <pie-chart *ngIf="dashboard.chartWidgets[0].type === 3" [charWidgetLocation]="1" [Stats]="chartData[0]">Loading...</pie-chart>
+                    </div>
+                    <div class="row col-md-4" style="height:100%; margin-top:15px;">
+                        <div class="container" style="width:180%;height:50%">
+                            <div class="row" style="margin-left: -169px;float: left;width: 100%;height:100%;">
+                                <div (click)="onclick($event,0);" id="draggable2" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 92%; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    <word-cloud *ngIf="dashboard.chartWidgets[1].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="2" [Stats]="chartData[1]"></word-cloud>
+                                    <pie-chart *ngIf="dashboard.chartWidgets[1].type === 2" [charWidgetLocation]="2" [Stats]="chartData[1]">Loading...</pie-chart>
+                                    <donut-chart *ngIf="dashboard.chartWidgets[1].type === 3" [charWidgetLocation]="2" [Stats]="chartData[1]"></donut-chart>
+                                </div>
+                                <div (click)="onclick($event,1);" id="draggable3" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 92%; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container" style="width:180%;height:50%">
+                            <div class="row" style="margin-left: -169px;float: left;width: 100%;height:100%;">
+                                <div (click)="onclick($event,0);" id="draggable4" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 92%; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,1);" id="draggable5" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 92%; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div (click)="onclick($event,5);" id="draggable6" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:100%; width: 33%; margin-top: 25px;">
+                        
+                    </div>
+                </div>
+
+                <div class="row" style="height:50%">
+                    <div (click)="onclick($event,0);" id="draggable7" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:100%; width: 33%; margin-top: 10px;">
+                        
+                    </div>
+                    <div class="row col-md-4" style="height:100%;">
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 216px;">
+                                <div (click)="onclick($event,0);" id="draggable8" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 128px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,1);" id="draggable9" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 128px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 216px;">
+                                <div (click)="onclick($event,0);" id="draggable10" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 128px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,1);" id="draggable11" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height:128px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div (click)="onclick($event,1);" id="draggable12" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:100%; width: 33%; margin-top: 10px;">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+		-->
+        <!-- *****************Dahsboard3************** 
+
+        <div id="DashboardContainer" *ngIf="isLoad  && name1==2"  class="row ttlconfigrowdiv" style="background-color:#E6E6E6;overflow:auto;height:569px;">
+            <div (click)="onclick($event,0);" id="draggable1" class="col-md-6 ttlconfigdivlayout">
+                <word-cloud *ngIf="dashboard.chartWidgets[0].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="1" [Stats]="chartData[0]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[0].type === 3" [charWidgetLocation]="1" [Stats]="chartData[0]">Loading...</pie-chart>
+            </div>
+            <div (click)="onclick($event,1);" id="draggable2" class="col-md-6 ttlconfigdivlayout">
+                <word-cloud *ngIf="dashboard.chartWidgets[1].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="2" [Stats]="chartData[1]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[1].type === 2" [charWidgetLocation]="2" [Stats]="chartData[1]">Loading...</pie-chart>
+                <donut-chart *ngIf="dashboard.chartWidgets[1].type === 3" [charWidgetLocation]="2" [Stats]="chartData[1]"></donut-chart>
+            </div>
+            <div (click)="onclick($event,2);" id="draggable3" class="col-md-4 ttlconfigdivlayout">
+               
+            </div>
+            <div (click)="onclick($event,3);" id="draggable4" class="col-md-4 ttlconfigdivlayout">
+                
+            </div>
+            <div (click)="onclick($event,4);" id="draggable5" class="col-md-4 ttlconfigdivlayout">
+                
+            </div>
+        </div>
+-->
+        <!-- *****************Dahsboard4**************
+
+        <div id="DashboardContainer" *ngIf="isLoad  && name1==3" class="row ttlconfigrowdiv" style="background-color:#E6E6E6;overflow:auto;height:500px;">
+            <div (click)="onclick($event,0);" id="draggable1" class="col-md-4 ttlconfigdivlayout">
+                <word-cloud *ngIf="dashboard.chartWidgets[0].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="1" [Stats]="chartData[0]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[0].type === 3" [charWidgetLocation]="1" [Stats]="chartData[0]">Loading...</pie-chart>
+            </div>
+            <div (click)="onclick($event,1);" id="draggable2" class="col-md-4 ttlconfigdivlayout">
+                <word-cloud *ngIf="dashboard.chartWidgets[1].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="2" [Stats]="chartData[1]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[1].type === 2" [charWidgetLocation]="2" [Stats]="chartData[1]">Loading...</pie-chart>
+                <donut-chart *ngIf="dashboard.chartWidgets[1].type === 3" [charWidgetLocation]="2" [Stats]="chartData[1]"></donut-chart>
+            </div>
+            <div (click)="onclick($event,2);" id="draggable3" class="col-md-4 ttlconfigdivlayout">
+               
+            </div>
+            <div (click)="onclick($event,3);" id="draggable4" class="col-md-4 ttlconfigdivlayout">
+               
+            </div>
+            <div (click)="onclick($event,4);" id="draggable5" class="col-md-4 ttlconfigdivlayout">
+                
+            </div>
+            <div (click)="onclick($event,5);" id="draggable6" class="col-md-4 ttlconfigdivlayout">
+                
+            </div>
+        </div>
+ -->
+        <!-- *****************Dahsboard5************** 
+
+        <div id="DashboardContainer" *ngIf="isLoad  && name1==4" class="row ttlconfigrowdiv" style="background-color:#E6E6E6;height:100%;">
+            <div class="container">
+                <div class="row">
+                    <div (click)="onclick($event,0);" id="draggable1" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:265px; margin-top: 25px;">
+                        <word-cloud *ngIf="dashboard.chartWidgets[0].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="1" [Stats]="chartData[0]"></word-cloud>
+                        <pie-chart *ngIf="dashboard.chartWidgets[0].type === 3" [charWidgetLocation]="1" [Stats]="chartData[0]">Loading...</pie-chart>
+                    </div>
+                    <div (click)="onclick($event,5);" id="draggable2" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:265px; margin-top: 25px;">
+                        <word-cloud *ngIf="dashboard.chartWidgets[1].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="2" [Stats]="chartData[1]"></word-cloud>
+                        <pie-chart *ngIf="dashboard.chartWidgets[1].type === 2" [charWidgetLocation]="2" [Stats]="chartData[1]">Loading...</pie-chart>
+                        <donut-chart *ngIf="dashboard.chartWidgets[1].type === 3" [charWidgetLocation]="2" [Stats]="chartData[1]"></donut-chart>
+                    </div>
+                    <div class="row col-md-4" style="height:265px; margin-top:15px;">
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 254px;">
+                                <div (click)="onclick($event,1);" id="draggable3" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 128px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,2);" id="draggable4" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 128px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 254px;">
+                                <div (click)="onclick($event,3);" id="draggable5" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 128px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,4);" id="draggable6" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 128px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div (click)="onclick($event,6);" id="draggable7" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:265px; margin-top: 10px;">
+                        
+                    </div>
+                    <div (click)="onclick($event,11);" id="draggable8" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:265px; margin-top: 10px;">
+                       
+                    </div>
+                    <div class="row col-md-4" style="height:265px;">
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 254px;">
+                                <div (click)="onclick($event,7);" id="draggable9" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 128px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,8);" id="draggable10" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 128px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 254px;">
+                                <div (click)="onclick($event,9);" id="draggable11" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 128px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,10);" id="draggable12" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height:128px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+-->
+        <!-- *****************Dahsboard6************** 
+
+        <div id="DashboardContainer" *ngIf="isLoad  && name1==5" class="row ttlconfigrowdiv" style="background-color:#E6E6E6;height:100%;">
+            <div class="container">
+                <div class="row">
+                    <div (click)="onclick($event,0);" id="draggable1" class="col-md-8 ttlconfigdivlayout" style="background-color:white; height:260px; width:63%;">
+                        <word-cloud *ngIf="dashboard.chartWidgets[0].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="1" [Stats]="chartData[0]"></word-cloud>
+                        <pie-chart *ngIf="dashboard.chartWidgets[0].type === 3" [charWidgetLocation]="1" [Stats]="chartData[0]">Loading...</pie-chart>
+                    </div>
+                    <div class="row col-md-4" style="height:260px; margin-top:10px; width:34%">
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 246px;">
+                                <div (click)="onclick($event,1);" id="draggable2" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    <word-cloud *ngIf="dashboard.chartWidgets[1].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="2" [Stats]="chartData[1]"></word-cloud>
+                                    <pie-chart *ngIf="dashboard.chartWidgets[1].type === 2" [charWidgetLocation]="2" [Stats]="chartData[1]">Loading...</pie-chart>
+                                    <donut-chart *ngIf="dashboard.chartWidgets[1].type === 3" [charWidgetLocation]="2" [Stats]="chartData[1]"></donut-chart>
+                                </div>
+                                <div (click)="onclick($event,2);" id="draggable3" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 246px;">
+                                <div (click)="onclick($event,3);" id="draggable4" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                   
+                                </div>
+                                <div (click)="onclick($event,4);" id="draggable5" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div (click)="onclick($event,5);" id="draggable6" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:260px; margin-top: 10px;">
+                        
+                    </div>
+                    <div (click)="onclick($event,6);" id="draggable7" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:260px; margin-top: 10px;">
+                       
+                    </div>
+                    <div (click)="onclick($event,7);" id="draggable8" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:260px; margin-top: 10px;">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+-->
+        <!-- *****************Dahsboard7**************
+
+        <div id="DashboardContainer" *ngIf="isLoad  && name1==6" class="row ttlconfigrowdiv" style="background-color:#E6E6E6;overflow:auto;height:500px;">
+            <div (click)="onclick($event,0);" id="draggable1" class="col-md-4 ttlconfigdivlayout">
+                <word-cloud *ngIf="dashboard.chartWidgets[0].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="1" [Stats]="chartData[0]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[0].type === 3" [charWidgetLocation]="1" [Stats]="chartData[0]">Loading...</pie-chart>
+
+            </div>
+            <div (click)="onclick($event,1);" id="draggable2" class="col-md-7 ttlconfigdivlayout">
+                <word-cloud *ngIf="dashboard.chartWidgets[1].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="2" [Stats]="chartData[1]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[1].type === 2" [charWidgetLocation]="2" [Stats]="chartData[1]">Loading...</pie-chart>
+                <donut-chart *ngIf="dashboard.chartWidgets[1].type === 3" [charWidgetLocation]="2" [Stats]="chartData[1]"></donut-chart>
+
+
+            </div>
+            <div (click)="onclick($event,2);" id="draggable3" class="col-md-4 ttlconfigdivlayout">
+                
+            </div>
+            <div (click)="onclick($event,3);" id="draggable4" class="col-md-7 ttlconfigdivlayout">
+               
+
+            </div>
+        </div>
+ -->
+        <!-- *****************Dahsboard8************** 
+
+        <div id="DashboardContainer" *ngIf="isLoad  && name1==7" class="row ttlconfigrowdiv" style="background-color:#E6E6E6;overflow:auto;height:500px;">
+            <div (click)="onclick($event,0);" id="draggable1" class="col-md-11 ttlconfigdivlayout">
+                <word-cloud *ngIf="dashboard.chartWidgets[0].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="1" [Stats]="chartData[0]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[0].type === 3" [charWidgetLocation]="1" [Stats]="chartData[0]">Loading...</pie-chart>
+
+            </div>
+            <div (click)="onclick($event,1);" id="draggable2" class="col-md-11 ttlconfigdivlayout">
+                <word-cloud *ngIf="dashboard.chartWidgets[1].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="2" [Stats]="chartData[1]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[1].type === 2" [charWidgetLocation]="2" [Stats]="chartData[1]">Loading...</pie-chart>
+                <donut-chart *ngIf="dashboard.chartWidgets[1].type === 3" [charWidgetLocation]="2" [Stats]="chartData[1]"></donut-chart>
+
+            </div>
+        </div>
+-->
+        <!-- *****************Dahsboard9************** 
+
+        <div id="DashboardContainer" *ngIf="isLoad  && name1==8" class="row ttlconfigrowdiv" style="background-color:#E6E6E6;overflow:auto;height:500px;">
+            <div (click)="onclick($event,0);" id="draggable1" class="col-md-4 ttlconfigdivlayout">
+                <word-cloud *ngIf="dashboard.chartWidgets[0].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="1" [Stats]="chartData[0]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[0].type === 3" [charWidgetLocation]="1" [Stats]="chartData[0]">Loading...</pie-chart>
+            </div>
+            <div (click)="onclick($event,1);" id="draggable2" class="col-md-4 ttlconfigdivlayout">
+                <word-cloud *ngIf="dashboard.chartWidgets[1].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="2" [Stats]="chartData[1]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[1].type === 2" [charWidgetLocation]="2" [Stats]="chartData[1]">Loading...</pie-chart>
+                <donut-chart *ngIf="dashboard.chartWidgets[1].type === 3" [charWidgetLocation]="2" [Stats]="chartData[1]"></donut-chart>
+            </div>
+            <div (click)="onclick($event,2);" id="draggable3" class="col-md-4 ttlconfigdivlayout">
+               
+            </div>
+            <div (click)="onclick($event,3);" id="draggable4" class="col-md-11 ttlconfigdivlayout">
+                
+            </div>
+        </div>
+-->
+        <!-- *****************Dahsboard10**************
+
+        <div id="DashboardContainer" *ngIf="isLoad  && name1==9" class="row ttlconfigrowdiv" style="background-color:#E6E6E6;overflow:auto;height:500px;">
+            <div (click)="onclick($event,0);" id="draggable1" class="col-md-11 ttlconfigdivlayout">
+                <word-cloud *ngIf="dashboard.chartWidgets[0].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="1" [Stats]="chartData[0]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[0].type === 3" [charWidgetLocation]="1" [Stats]="chartData[0]">Loading...</pie-chart>
+            </div>
+            <div (click)="onclick($event,1);" id="draggable2" class="col-md-4 ttlconfigdivlayout">
+                <word-cloud *ngIf="dashboard.chartWidgets[1].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="2" [Stats]="chartData[1]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[1].type === 2" [charWidgetLocation]="2" [Stats]="chartData[1]">Loading...</pie-chart>
+                <donut-chart *ngIf="dashboard.chartWidgets[1].type === 3" [charWidgetLocation]="2" [Stats]="chartData[1]"></donut-chart>
+            </div>
+            <div (click)="onclick($event,2);" id="draggable3" class="col-md-4 ttlconfigdivlayout">
+                
+            </div>
+            <div (click)="onclick($event,3);" id="draggable4" class="col-md-4 ttlconfigdivlayout">
+                
+            </div>
+        </div>
+ -->
+        <!-- *****************Dahsboard11**************
+
+        <div id="DashboardContainer" *ngIf="isLoad  && name1==10" class="row ttlconfigrowdiv" style="background-color:#E6E6E6;overflow:auto;height:500px;">
+            <div (click)="onclick($event,0);" id="draggable1" class="col-md-4 ttlconfigdivlayout" style="height:440px">
+                <word-cloud *ngIf="dashboard.chartWidgets[0].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="1" [Stats]="chartData[0]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[0].type === 3" [charWidgetLocation]="1" [Stats]="chartData[0]">Loading...</pie-chart>
+            </div>
+            <div (click)="onclick($event,1);" id="draggable2" class="col-md-4 ttlconfigdivlayout" style="height:440px">
+                <word-cloud *ngIf="dashboard.chartWidgets[1].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="2" [Stats]="chartData[1]"></word-cloud>
+                <pie-chart *ngIf="dashboard.chartWidgets[1].type === 2" [charWidgetLocation]="2" [Stats]="chartData[1]">Loading...</pie-chart>
+                <donut-chart *ngIf="dashboard.chartWidgets[1].type === 3" [charWidgetLocation]="2" [Stats]="chartData[1]"></donut-chart>
+            </div>
+            <div (click)="onclick($event,2);" id="draggable3" class="col-md-4 ttlconfigdivlayout" style="height:440px">
+                
+            </div>
+        </div>
+ -->
+        <!-- *****************Dahsboard12************** 
+
+        <div id="DashboardContainer" *ngIf="isLoad  && name1==11" class="row ttlconfigrowdiv" style="background-color:#E6E6E6;height:100%;">
+            <div class="container">
+                <div class="row">
+                    <div class="row col-md-4" style="height:260px; margin-top:15px;">
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 246px;">
+                                <div (click)="onclick($event,0);" id="draggable1" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    <word-cloud *ngIf="dashboard.chartWidgets[0].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="1" [Stats]="chartData[0]"></word-cloud>
+                                    <pie-chart *ngIf="dashboard.chartWidgets[0].type === 3" [charWidgetLocation]="1" [Stats]="chartData[0]">Loading...</pie-chart>
+
+                                </div>
+                                <div (click)="onclick($event,1);" id="draggable2" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    <word-cloud *ngIf="dashboard.chartWidgets[1].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="2" [Stats]="chartData[1]"></word-cloud>
+                                    <pie-chart *ngIf="dashboard.chartWidgets[1].type === 2" [charWidgetLocation]="2" [Stats]="chartData[1]">Loading...</pie-chart>
+                                    <donut-chart *ngIf="dashboard.chartWidgets[1].type === 3" [charWidgetLocation]="2" [Stats]="chartData[1]"></donut-chart>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 246px;">
+                                <div (click)="onclick($event,2);" id="draggable3" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,3);" id="draggable4" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div (click)="onclick($event,4);" id="draggable5" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:260px; margin-top:25px; margin-left:35px;">
+                        
+
+                    </div>
+                    <div class="row col-md-4" style="height:260px; margin-top:15px;">
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 246px;">
+                                <div (click)="onclick($event,5);" id="draggable6" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,6);" id="draggable7" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 246px;">
+                                <div (click)="onclick($event,7);" id="draggable8" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,8);" id="draggable9" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="row col-md-4" style="height:260px; margin-top:5px;">
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 246px;">
+                                <div (click)="onclick($event,9);" id="draggable10" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,10);" id="draggable11" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 246px;">
+                                <div (click)="onclick($event,11);" id="draggable12" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,12);" id="draggable13" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div (click)="onclick($event,13);" id="draggable14" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:260px; margin-top:15px; margin-left:35px;">
+                        
+                    </div>
+                    <div class="row col-md-4" style="height:260px; margin-top:5px;">
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 246px;">
+                                <div (click)="onclick($event,14);" id="draggable15" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,15);" id="draggable16" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -169px;float: left;width: 246px;">
+                                <div (click)="onclick($event,16);" id="draggable17" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,17);" id="draggable18" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+-->
+        <!-- *****************Dahsboard13************** 
+
+        <div id="DashboardContainer" *ngIf="isLoad  && name1==12" class="row ttlconfigrowdiv" style="background-color:#E6E6E6;height:100%;">
+            <div class="container">
+                <div class="row">
+                    <div (click)="onclick($event,0);" id="draggable1" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:260px; margin-top:25px; margin-left:23px;">
+                        <word-cloud *ngIf="dashboard.chartWidgets[0].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="1" [Stats]="chartData[0]"></word-cloud>
+                        <pie-chart *ngIf="dashboard.chartWidgets[0].type === 3" [charWidgetLocation]="1" [Stats]="chartData[0]">Loading...</pie-chart>
+                    </div>
+                    <div class="row col-md-4" style="height:260px; margin-top:15px;">
+                        <div class="container">
+                            <div class="row" style="margin-left: -179px;float: left;width: 246px;">
+                                <div (click)="onclick($event,1);" id="draggable2" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    <word-cloud *ngIf="dashboard.chartWidgets[1].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="2" [Stats]="chartData[1]"></word-cloud>
+                                    <pie-chart *ngIf="dashboard.chartWidgets[1].type === 2" [charWidgetLocation]="2" [Stats]="chartData[1]">Loading...</pie-chart>
+                                    <donut-chart *ngIf="dashboard.chartWidgets[1].type === 3" [charWidgetLocation]="2" [Stats]="chartData[1]"></donut-chart>
+                                </div>
+                                <div (click)="onclick($event,2);" id="draggable3" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -179px;float: left;width: 246px;">
+                                <div (click)="onclick($event,3);" id="draggable4" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,4);" id="draggable5" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-md-4" style="height:260px; margin-top:15px;">
+                        <div class="container">
+                            <div class="row" style="margin-left: -164px;float: left;width: 246px;">
+                                <div (click)="onclick($event,5);" id="draggable6" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,6);" id="draggable7" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -164px;float: left;width: 246px;">
+                                <div (click)="onclick($event,7);" id="draggable8" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,8);" id="draggable9" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div (click)="onclick($event,9);" id="draggable10" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:260px; margin-top:10px; margin-left:23px;">
+                        
+                    </div>
+                    <div class="row col-md-4" style="height:260px;">
+                        <div class="container">
+                            <div class="row" style="margin-left: -179px;float: left;width: 246px;">
+                                <div (click)="onclick($event,10);" id="draggable11" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,11);" id="draggable12" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -179px;float: left;width: 246px;">
+                                <div (click)="onclick($event,12);" id="draggable13" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,13);" id="draggable14" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-md-4" style="height:260px;">
+                        <div class="container">
+                            <div class="row" style="margin-left: -164px;float: left;width: 246px;">
+                                <div (click)="onclick($event,14);" id="draggable15" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,15);" id="draggable16" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -164px;float: left;width: 246px;">
+                                <div (click)="onclick($event,16);" id="draggable17" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,17);" id="draggable18" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+-->
+        <!-- *****************Dahsboard14**************
+
+
+        <div id="DashboardContainer" *ngIf="isLoad  && name1==13" class="row ttlconfigrowdiv" style="background-color:#E6E6E6;height:100%;">
+            <div class="container">
+                <div class="row">
+                    <div class="row col-md-4" style="height:260px; margin-top:15px;">
+                        <div class="container">
+                            <div class="row" style="margin-left: -160px;float: left;width: 246px;">
+                                <div (click)="onclick($event,0);" id="draggable1" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    <word-cloud *ngIf="dashboard.chartWidgets[0].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="1" [Stats]="chartData[0]"></word-cloud>
+                                    <pie-chart *ngIf="dashboard.chartWidgets[0].type === 3" [charWidgetLocation]="1" [Stats]="chartData[0]">Loading...</pie-chart>
+                                </div>
+                                <div (click)="onclick($event,1);" id="draggable2" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    <word-cloud *ngIf="dashboard.chartWidgets[1].type=== 1" style="height:200px;width:200px;" [charWidgetLocation]="2" [Stats]="chartData[1]"></word-cloud>
+                                    <pie-chart *ngIf="dashboard.chartWidgets[1].type === 2" [charWidgetLocation]="2" [Stats]="chartData[1]">Loading...</pie-chart>
+                                    <donut-chart *ngIf="dashboard.chartWidgets[1].type === 3" [charWidgetLocation]="2" [Stats]="chartData[1]"></donut-chart>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -160px;float: left;width: 246px;">
+                                <div (click)="onclick($event,2);" id="draggable3" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+
+                                </div>
+                                <div (click)="onclick($event,3);" id="draggable4" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row col-md-4" style="height:260px; margin-top:15px;">
+                        <div class="container">
+                            <div class="row" style="margin-left: -145px;float: left;width: 246px;">
+                                <div (click)="onclick($event,4);" id="draggable5" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,5);" id="draggable6" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -145px;float: left;width: 246px;">
+                                <div (click)="onclick($event,6);" id="draggable7" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+
+                                </div>
+                                <div (click)="onclick($event,7);" id="draggable8" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div (click)="onclick($event,8);" id="draggable9" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:260px; margin-top:25px; margin-left:52px;">
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="row">
+                    <div class="row col-md-4" style="height:260px;">
+                        <div class="container">
+                            <div class="row" style="margin-left: -160px;float: left;width: 246px;">
+                                <div (click)="onclick($event,9);" id="draggable10" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,10);" id="draggable11" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -160px;float: left;width: 246px;">
+                                <div (click)="onclick($event,11);" id="draggable12" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,12);" id="draggable13" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row col-md-4" style="height:260px;">
+                        <div class="container">
+                            <div class="row" style="margin-left: -145px;float: left;width: 246px;">
+                                <div (click)="onclick($event,13);" id="draggable14" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,14);" id="draggable15" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-bottom: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container">
+                            <div class="row" style="margin-left: -145px;float: left;width: 246px;">
+                                <div (click)="onclick($event,15);" id="draggable16" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 7px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                                <div (click)="onclick($event,16);" id="draggable17" class="col-md-3 ttlconfigdivlayoutsmall" style="background-color:white; height: 125px; margin-top: 5px; margin-left: 5px; margin-right: 5px; width: 45%; float: left;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div (click)="onclick($event,17);" id="draggable18" class="col-md-4 ttlconfigdivlayout" style="background-color:white; height:260px; margin-top:10px; margin-left:52px;">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+-->
+
+
+        <!-- *****************Dahsboard End************** -->
+
+    </div>
+</div>

@@ -1,0 +1,147 @@
+<div [@routerTransition]>
+
+    <div class="main-portlet">
+        <div class="portlet light portlet-fit portlet-datatable bordered">
+            <div class="portlet-title">
+                <div class="caption font-black-sharp" style="margin-bottom:-10px;margin-top:10px">
+                    <img alt="" class="img-box  headimg" src="../../../assets/img/img/RDBMS.svg"> <span class="caption-subject bold uppercase">Explore Datatset</span>
+                </div>
+
+
+                <!--<div class="row">
+                    <div class="col-md-2"></div>
+                    <ul class="nav nav-pills">
+                        <li><a href="#"><label class="numsize"><label style="color:gray">56</label><small style="color:gray">Views</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">106</label><small style="color:gray">Records</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">73</label><small style="color:gray">Edited</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">24</label><small style="color:gray">Explore</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">13</label><small style="color:gray">Types</small></label></a></li>
+                    </ul>
+                </div>-->
+            </div>
+
+            <div class="divtoggleheader">
+
+                <span class="searchspan">
+
+                    <input class="form-control" (keyup)="filter($event.target.value)" type="text" placeholder="Search...">
+
+                </span>
+
+            </div><br /><hr />
+
+            <div class="table-responsive">
+
+                <div *ngIf="showTable==='datasetData'">
+                    <div class="caption row" style="margin-top: -20px;margin-bottom: -10px;">
+                        <div class="col-md-3">Parent Dataset :<b>{{pass.passName}}</b></div>
+                        <div class="col-md-1" (click)="onEdit()"><i class="fa fa-pencil fa-mid hyper-link" aria-hidden="true"></i></div>
+                    </div>
+                    <br />
+                    <div class="panel-group" *ngFor="let sub of subData; let sr=index;">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title row">
+                                    <div class="col-sm-3" style="width:30%">
+                                        <img [src]="!in ? '../../../assets/global/img/dropdown1.svg' : '../../../assets/global/img/edit.svg'" data-toggle="collapse" [attr.data-target]="'#'+sr" style="height: 11px;" />
+                                        &nbsp; {{sub.entityName}}
+                                    </div>
+                                    <div class="col-md-1" (click)="onEdit()">
+                                        <i class="fa fa-pencil fa-mid hyper-link" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div id="{{sr}}" class="panel-collapse collapse">
+                                    <div class="panel-body" style="overflow: scroll;height: 246px;">
+                                        <table class="table table-striped table-hover table-checkable dataTable no-footer" id="datatable_ajax" aria-describedby="datatable_ajax_info" role="grid">
+                                            <thead>
+
+                                                <tr role="row" class="heading">
+                                                    <th class="sorting" tabindex="0" aria-controls="datatable_ajax" rowspan="1" colspan="1" width="5%"> </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatable_ajax" rowspan="1" colspan="1" width="15%">Entity Name </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatable_ajax" rowspan="1" colspan="1" width="15%">Entity Type </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatable_ajax" rowspan="1" colspan="1" width="15%"> DataType</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatable_ajax" rowspan="1" colspan="1" width="20%">dataset Name</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="datatable_ajax" rowspan="1" colspan="1" width="20%"> Entity Description</th>
+                                                </tr>
+
+                                            </thead>
+                                            <tbody>
+
+                                                <tr role="row" class="filter" *ngFor="let f of sub.datasetFields; let id=index">
+                                                    <td rowspan="1" colspan="1"> <label>{{id+1}}</label> </td>
+                                                    <td rowspan="1" colspan="1"><label>{{f.entityName}}</label></td>
+                                                    <td rowspan="1" colspan="1"><label>{{f.entityType}} Field</label></td>
+                                                    <td rowspan="1" colspan="1"><label> {{f.dataType}}</label></td>
+                                                    <td rowspan="1" colspan="1"><label> {{f.datasetName}}</label></td>
+                                                    <td rowspan="1" colspan="1"><label> {{f.entityDescription}}</label></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+                <div *ngIf="showTable==='analysisData'">
+                    <div class="caption row" style="margin-top: -20px;margin-bottom: -10px;">
+                        <div class="col-md-3">Parent Analysis :<b>{{analysisName}}</b></div>
+                        <div class="col-md-1" (click)="onEdit()"><i class="fa fa-pencil fa-mid hyper-link" aria-hidden="true"></i></div>
+                    </div>
+                    <br />
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <!--<div class="panel-title row">
+                                    <div class="col-sm-3" style="width:30%">
+                                        <img [src]="!in ? '../../../assets/global/img/dropdown1.svg' : '../../../assets/global/img/edit.svg'" data-toggle="collapse" [attr.data-target]="'#'+sr" style="height: 11px;" />
+                                        &nbsp;
+                                    </div>
+                                </div>-->
+                                <div>
+                                    <div class="panel-body" style="overflow: scroll;height: 246px;">
+                                        <table class="table table-striped table-hover table-checkable dataTable no-footer" id="datatable_ajax" aria-describedby="datatable_ajax_info" role="grid">
+                                            <thead>
+
+                                                <tr role="row" class="heading">
+                                                    <th class="sorting" tabindex="0" *ngFor="let header of headerArray" aria-controls="datatable_ajax" rowspan="1" colspan="1" width="15%">{{header}}</th>
+                                                </tr>
+
+                                            </thead>
+                                            <tbody>
+
+                                                <tr role="row" class="filter" *ngFor="let k of viewAnalysisData">
+                                                    <td rowspan="1" colspan="1" *ngFor="let x of k.dataArray"> <label> {{x}} </label></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <!--</div>-->
+            </div>
+        </div>
+
+    </div>
+
+</div>

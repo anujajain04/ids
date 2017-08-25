@@ -1,0 +1,64 @@
+<div [@routerTransition] [style.height.px]="height">
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-title">
+            <div class="caption font-black-sharp">
+                <span class="caption-subject bold uppercase" >Configure RSS Dataset</span>
+            </div>
+           
+        </div>
+        <form [formGroup]="complexForm" (ngSubmit)="submitForm(complexForm.value)">
+            <div class="custmdivleft">
+                <div class="row">
+                    <div class="col-sm-12"><img src="../../../assets/global/img/Help.svg" class="helpiconcustm" title="Help Text Goes Here"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-4 col-sm-4"><label class="red-text">*</label> Name :</div>
+                    <!--<div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['name'].valid}">-->
+                    <div class="col-sm-4 col-xs-4 col-sm-4" [ngClass]="{'has-error':!complexForm.controls['name'].valid && complexForm.controls['name'].touched}">
+                        <input class="form-control" [(ngModel)]="gsDataset.entityName" [formControl]="complexForm.controls['name']" type="text" placeholder="Enter Name">
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-sm-3">
+                        <span style="color:red" *ngIf="complexForm.controls['name'].hasError('required') && complexForm.controls['name'].touched">Enter Name</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-4 col-sm-4"><label class="red-text">*</label> Description :</div>
+                    <div class="col-sm-4 col-xs-4 col-sm-4" [ngClass]="{'has-error':!complexForm.controls['description'].valid && complexForm.controls['description'].touched}">
+                        <input class="form-control" [(ngModel)]="gsDataset.entityDescription" [formControl]="complexForm.controls['description']" type="text" placeholder="Enter Description">
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-sm-4">
+                        <span style="color:red" *ngIf="complexForm.controls['description'].hasError('required') && complexForm.controls['description'].touched">Enter Description</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-4 col-sm-4"><label class="red-text">*</label> URL :</div>
+                    <div class="col-sm-4 col-xs-4 col-sm-4" [ngClass]="{'has-error':!complexForm.controls['url'].valid && complexForm.controls['url'].touched}">
+                        <input class="form-control" [value]="getUrl()" [formControl]="complexForm.controls['url']" type="text" placeholder="Enter URL">
+
+                    </div>
+                    <div class="col-md-1 col-xs-1 col-sm-1" style="margin-top:-10px;">
+                        <span (click)="getRssFields()" class="hyper-link"><u>Get Fields</u> </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-4 col-sm-4"><label>Select Dataset field To Read :</label></div>
+                    <div class="col-md-2 col-xs-2 col-sm-2">
+                        <select multiple="multiple" #field class="form-control">
+                            <option *ngFor="let f of rssFields" value="{{f}}">{{f}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2 col-xs-2 col-sm-2" style="margin-left: 33px;">
+                        <i class="material-icons hyper-link" style="margin-left: -42px;" (click)="arrowClick(true)">chevron_right</i><br />
+                        <i class="material-icons hyper-link" style="margin-left: -42px;" (click)="arrowClick(false)">chevron_left</i>
+                    </div>
+                    <div class="col-md-2 col-xs-2 col-sm-2">
+                        <select multiple="multiple" #selectField class="form-control" style="margin-left:-195px">
+                            <option *ngFor="let f of selectedField" value="{{f}}">{{f}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

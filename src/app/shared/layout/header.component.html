@@ -1,0 +1,57 @@
+<div class="page-header navbar navbar-fixed-top md-shadow-zero-light">
+    <div class="page-header-inner">
+        <div class="page-logo ">
+            <a routerLink="/" target="_blank">
+                <img src="../../../assets/global/img/iDS Logo.svg" alt="logo" class="logo-default " width="92" height="33" />
+            </a>
+            <div class="menu-toggler sidebar-toggler">
+                <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+            </div>
+        </div>
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+        </a>
+
+        <breadcrumb></breadcrumb>
+        <div class="page-top">
+
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown dropdown-extended quick-sidebar-toggler" *ngIf="chatEnabled && chatConnected">
+                        <span class="sr-only">Toggle Quick Sidebar</span>
+                        <!--<i class="icon-speech"></i>-->
+                        <img alt="" class="img-circle askimg" src="../../../assets/global/img/ask.svg">
+                        <span id="UnreadChatMessageCount" class="badge badge-danger" [ngClass]="{'hidden': !unreadChatMessageCount}">{{unreadChatMessageCount}}</span>
+                    </li>
+
+                    <li class="dropdown dropdown-user">
+                        <a href="#" class="dropdown-toggle" dropdown-menu-hover="" data-toggle="dropdown" data-close-others="true" aria-expanded="true">
+                            <span class="username username-hide-on-mobile">{{userName}}</span>
+                            <img alt="" class="img-circle" src="../../../assets/global/img/man.svg">
+                            <i class="fa fa-angle-down fa-big"></i>
+
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            <!--<li style="margin-top:11px">
+                                <a href="javascript:;"><i class="fa fa-user-plus"></i> View Account Option</a>
+                            </li>-->
+                            <li style="margin-top:5px">
+                                <a href="javascript:;" (click)="ChangePassword()"><i class="icon-speech"></i> Change Password</a>
+                            </li>
+                            <li style="margin-top:5px">
+                                <a href="javascript:;" (click)="logout()"><i class="icon-logout"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li *ngIf="!chatConnected" class="dropdown dropdown-extended">
+                        <a href="javascript:;" class="dropdown-toggle">
+                            <!--<img *ngIf="!chatConnected" src="../../../assets/metronic/global/img/loading.gif" tooltip="{{l('ChatIsConnecting')}}" tooltipPlacement="left" />-->
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<changePasswordModal #changePasswordModal></changePasswordModal>
+<changeProfilePictureModal #changeProfilePictureModal></changeProfilePictureModal>

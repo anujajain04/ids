@@ -1,0 +1,56 @@
+<div [@routerTransition] [style.height.px]="height">
+    <div class="portlet light margin-bottom-0">
+        <div class="portlet-title">
+            <div class="caption font-black-sharp">
+                <span class="caption-subject bold uppercase" >Configure Sentiment Detection Analysis </span>
+            </div>
+           
+        </div>
+
+        <div class="row">
+                <div class="col-sm-4"><b>DATASET NAME:&nbsp;{{gsDataset.entityName}}</b></div>
+            </div>
+        <form [formGroup]="complexForm" (ngSubmit)="submitForm(complexForm.value)">
+            <div class="custmdivleft">
+                <div class="row">
+                    <div class="col-sm-12"><img src="../../../assets/global/img/Help.svg" class="helpiconcustm"title="Help Text Goes Here"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><label class="red-text">*</label> About Analysis :</div>
+                    <div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['name'].valid && complexForm.controls['name'].touched}">
+                        <input class="form-control" type="text" [formControl]="complexForm.controls['name']" placeholder="Name Of The Analysis">
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red" *ngIf="complexForm.controls['name'].hasError('required') && complexForm.controls['name'].touched">Enter Name</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><label>Description :</label></div>
+                    <div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['description'].valid && complexForm.controls['description'].touched}">
+                        <input class="form-control" type="text" [formControl]="complexForm.controls['description']" placeholder="Enter Description">
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red" *ngIf="complexForm.controls['description'].hasError('required') && complexForm.controls['description'].touched"><label class="red-text">*</label> Enter Description</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-sm-4"><b>Analysis Mapping :</b></div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-4"><label class="red-text">*</label> <label>Choose Text To Analyse :</label></div>
+
+                    <div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['Dataset_fields'].valid && complexForm.controls['Dataset_fields'].touched}">
+                        <select class="form-control" [formControl]="complexForm.controls['Dataset_fields']">
+                            <option style="display:none" value="">-Select Dataset Fields-</option>
+                            <option [value]="m" *ngFor="let m of modelFiledList">{{m}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <hr />
+    </div>
+</div>

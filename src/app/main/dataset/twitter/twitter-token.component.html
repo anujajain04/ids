@@ -1,0 +1,86 @@
+<div [@routerTransition]>
+    <div class="main-portlet">
+        <div class="portlet light portlet-fit portlet-datatable">
+            <div class="portlet-title">
+                <div class="caption ">
+                    <img alt="" class="img-box  headimg" src="../../../assets/global/img/Twitter color.svg">  Edit Twitter Dataset 1 Setting
+                </div>
+
+                <!--<div class="row">
+                    <ul class="nav nav-pills">
+                        <li><a href="#"><label class="numsize"><label style="color:gray">56</label><small style="color:gray">Views</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">106</label><small style="color:gray">Records</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">73</label><small style="color:gray">Edited</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">24</label><small style="color:gray">Explore</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">13</label><small style="color:gray">Types</small></label></a></li>
+                    </ul>
+                </div>-->
+            </div>
+            <div class="backstrip row">
+                <div class="col-sm-1"></div>
+                <label><b>Token Details</b></label>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4" style="padding-left:0px;"><input class="form-control" type="text" placeholder="APP ID" /></div>
+            <div class="col-md-4" style="padding-left:20px;"><input class="form-control" type="text" placeholder="Consumer Key" /></div>
+        </div>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4" style="padding-left:0px;margin-top: 15px;"><input class="form-control" type="text" placeholder="Consumer Secret" /></div>
+            <div class="col-md-4" style="padding-left:20px;margin-top: 15px;"><input class="form-control" type="text" placeholder="Access Token" /></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4" style="padding-left:0px;margin-top: 15px;"><input class="form-control" type="text" placeholder="Access Token Secret" /></div>
+            <div class="col-md-4"></div>
+        </div>
+
+        <br />
+        <div class="row backstrip">
+            <div class="col-md-1"></div>
+            <div class="col-sm-1"><button class="btn btn-yellow">Save</button></div>
+            <div class="col-sm-1" style="width:35px;"></div>
+            <div class="col-sm-1"><button class="btn btn-yellow" (click)="back()">Back</button></div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-2"><img [src]="!in ? '../../../assets/global/img/dropdown1.svg' : '../../../assets/global/img/edit.svg'" data-toggle="collapse" data-target="#toggleDemo2" style="height: 11px;" />&nbsp; Twitter Token List</div>
+        </div>
+       
+        <div class="listscorlbar" style="overflow-y:auto;height:250px">
+            <div class="row">
+                <div class="table-responsive collapse out" id="toggleDemo2">
+                    <table class="table table-striped table-hover table-checkable dataTable no-footer" id="datatable_ajax" aria-describedby="datatable_ajax_info"
+                           role="grid">
+                        <thead>
+                            <tr>
+                                <th width="5%" style="background-color: #F1F1F1;"></th>
+                                <th rowspan="1" colspan="1" width="20%" style="background-color: #F1F1F1;">APP ID</th>
+                                <th rowspan="1" colspan="1" width="20%" style="background-color: #F1F1F1;">Consumer Key</th>
+                                <th rowspan="1" colspan="1" width="20%" style="background-color: #F1F1F1;">Consumer Secret </th>
+                                <th rowspan="1" colspan="1" width="20%" style="background-color: #F1F1F1;"> Access Token</th>
+                                <th rowspan="1" colspan="1" width="20%" style="background-color: #F1F1F1;"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a><input type="checkbox" /></a></td>
+                                <td>123</td>
+                                <td>C Key</td>
+                                <td>C Secret</td>
+                                <td>dfdfgdfg</td>
+                                <td><a><i class="fa fa-trash fa-mid"></i></a></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

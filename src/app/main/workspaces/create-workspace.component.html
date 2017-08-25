@@ -1,0 +1,40 @@
+<div [@routerTransition] [style.height.px]="height">
+    <div class="main-portlet">
+        <div class="portlet light" style="width:95%;">
+            <div class="portlet-title">
+                <div class="caption font-black-sharp">
+                    <span class="caption-subject bold uppercase"> Create Workspace</span>
+                </div>
+
+            </div>
+            <form [formGroup]="complexForm">
+                <div class="row">
+                    <div class="col-md-2 col-xs-2 col-sm-2"><label class="red-text">*</label> Name :</div>
+                    <div class="col-md-2 col-xs-2 col-sm-2" style="margin-top:10px" [ngClass]="{'has-error':!complexForm.controls['name'].valid && complexForm.controls['name'].touched}">
+                        <input class="form-control" [(ngModel)]="workDataset.entityName" [formControl]="complexForm.controls['name']" type="text" placeholder="Name" />
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-sm-3">
+                        <span style="color:red" *ngIf="complexForm.controls['name'].hasError('required') && complexForm.controls['name'].touched">Enter Name</span>
+                    </div>
+                </div>
+                <!--<br />-->
+                <div class="row">
+                    <div class="col-md-2 col-xs-2 col-sm-2"><label class="red-text">*</label> Description :</div>
+                    <div class="col-md-2 col-xs-2 col-sm-2" style="margin-top:10px" [ngClass]="{'has-error':!complexForm.controls['description'].valid && complexForm.controls['description'].touched}">
+                        <input type="text" class="form-control" [(ngModel)]="workDataset.entityDescription" [formControl]="complexForm.controls['description']" placeholder="Description" />
+                    </div>
+                    <div class="col-md-3 col-xs-3 col-sm-3">
+                        <span style="color:red" *ngIf="complexForm.controls['description'].hasError('required') && complexForm.controls['description'].touched">Enter Description</span>
+                    </div>
+                </div>
+                <!--<br />-->
+                <div class="row">
+                    <div class="col-md-2"></div>
+                    <div *ngIf="!wService.update" class="col-md-2 col-xs-2 col-sm-2" style="width: 125px;"><button (click)="submitForm(complexForm.value)" class="btn btn-primary blue" [disabled]="!complexForm.valid">Create</button></div>
+                    <div *ngIf="wService.update" class="col-md-2 col-xs-2 col-sm-2" style="width: 125px;"><button  (click)="updateForm()" class="btn btn-primary blue" [disabled]="!complexForm.valid">Update</button></div>
+                    <div class="col-md-2 col-xs-2 col-sm-2"><button (click)="change(true)" class="btn btn-primary blue">Cancel</button></div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>          

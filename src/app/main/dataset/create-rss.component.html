@@ -1,0 +1,82 @@
+<div [@routerTransition]>
+
+    <div class="main-portlet">
+        <div class="portlet light portlet-fit portlet-datatable" [style.height.px]="height1">
+            <div class="portlet-title">
+                <div class="caption">
+                    <!--<i class="fa fa-rss" style="color:#FFC433"></i> {{pass.isUpdate}} </div>-->
+                    <img alt="" class="img-box  headimg" src="../../../assets/global/img/RSS color.svg">{{pass.isUpdate?"Edit":"Create"}} RSS Dataset
+                </div>
+             
+
+
+                <!--<div class="row">
+                  
+                    <ul class="nav nav-pills">
+                        <li><a href="#"><label class="numsize"><label style="color:gray">56</label><small style="color:gray">Views</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">106</label><small style="color:gray">Views</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">73</label><small style="color:gray">Views</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">24</label><small style="color:gray">Views</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">13</label><small style="color:gray">Views</small></label></a></li>
+                    </ul>
+                </div>-->
+            </div>
+           
+           
+            <form [formGroup]="complexForm" (ngSubmit)="submitForm(complexForm.value)">
+                <div class="row">
+                    <label class="col-sm-2" style="text-align: right;margin-top: -10px;"><label class="red-text">*</label> Name :</label>
+                    <!--<div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['name'].valid}">-->
+                    <div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['name'].valid && complexForm.controls['name'].touched}">
+                        <input class="form-control" [disabled]="pass.isUpdate" [(ngModel)]="rssData.entityName"  [formControl]="complexForm.controls['name']" type="text" placeholder="Enter Name">
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red" *ngIf="complexForm.controls['name'].hasError('required') && complexForm.controls['name'].touched">Enter Name</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2" style="text-align: right;margin-top: -10px;"><label class="red-text">*</label> Description :</label>
+                    <div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['description'].valid && complexForm.controls['description'].touched}">
+                        <input class="form-control" [(ngModel)]="rssData.entityDescription" [formControl]="complexForm.controls['description']" type="text" placeholder="Enter Description">
+                    </div>
+                    <div class="col-md-3">
+                        <span style="color:red" *ngIf="complexForm.controls['description'].hasError('required') && complexForm.controls['description'].touched">Enter Description</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2" style="text-align: right;margin-top: -10px;"><label class="red-text">*</label> Url :</label>
+                    <div class="col-sm-4" [ngClass]="{'has-error':!complexForm.controls['url'].valid && complexForm.controls['url'].touched}">
+                        <input class="form-control" [value]="getUrl()" [formControl]="complexForm.controls['url']" type="text" placeholder="Enter URL">
+
+                    </div>
+                    <div class="col-md-1" style="margin-top:-10px;">
+                        <span (click)="getRssFields()" class="hyper-link"><u>Get Fields</u> </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <label class="col-sm-2" style="text-align: right;margin-top: -10px;">Select Dataset Field To Read :</label>
+                    <div class="col-md-2">
+                        <select multiple="multiple" #field class="form-control">
+                            <option *ngFor="let f of rssFields" value="{{f}}">{{f}}</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2" style="margin-left: 33px;">
+                        <i class="material-icons hyper-link" style="margin-left: -42px;" (click)="arrowClick(true)">chevron_right</i><br />
+                        <i class="material-icons hyper-link" style="margin-left: -42px;" (click)="arrowClick(false)">chevron_left</i>
+                    </div>
+                    <div class="col-md-2">
+                        <select multiple="multiple" #selectField class="form-control" style="margin-left:-195px">
+                            <option *ngFor="let f of selectedField" value="{{f}}">{{f}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row backstrip footer" style="margin-top:269px">
+                    <button type="submit" class="pull-right btn btn-sm btn-yellow" [disabled]="!complexForm.valid"> &nbsp; {{pass.isUpdate?"Save":"Create"}} &nbsp; </button>
+                </div>
+            </form> 
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,15 @@
+<div [@routerTransition]>
+    <div class="main-portlet" style="height:850px">
+
+       
+        <!-- *****************Dahsboard1************** -->
+     <div style="margin-top: -9px;width:110%">
+       <span   class="caption-subject bold uppercase">{{dashboardTitle}}</span>
+        <br>       
+      </div>
+      <div  id="DashboardContainer"  class="row ttlconfigrowdiv" style="background-color:#E6E6E6;overflow:hidden;height:600px;" >
+	 	<chart-root1 [dashboardData]="demoDashboardData" ></chart-root1>
+	  </div>	
+  
+    </div>
+</div>

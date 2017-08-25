@@ -1,0 +1,64 @@
+﻿<div><b>Sampler Properties</b></div>
+<div class="row">
+    <input type="text" placeholder="Sampler Task 1" [(ngModel)]="config.currentSampler.entityName" name="rt" class="form-control" />
+</div>
+<div><b>Sampler Type:</b>{{config.currentSampler.tType}}</div>
+<!-- *ngIf="config.currentSampler.className==='StratifiedSampler'" -->
+<div>
+    <div class="row">
+        <div class="radio-inline">
+            <!--value="number" [(ngModel)]="config.currentSampler.numberPercentageFlag"-->
+            <label><input type="radio" [(ngModel)]="config.currentSampler.numberPercentageFlag" [value]="'number'" name="optradio" style="margin-left: -18px;margin-top: 18px; ">Number</label>
+        </div>
+        <div class="radio-inline">
+            <label><input type="radio" [(ngModel)]="config.currentSampler.numberPercentageFlag" [value]="'percentage'" style="margin-left: -18px;margin-top: 18px; ">Percentage</label>
+        </div>
+    </div>
+    <div>
+        <div class="row" *ngIf="config.currentSampler.numberPercentageFlag=='number'">
+            <input type="text" placeholder="Enter Sampling Number" [(ngModel)]="config.currentSampler.sampleNumber" class="form-control" />
+        </div>
+        <div class="row" style="margin-top: -25px;" *ngIf="config.currentSampler.numberPercentageFlag=='percentage'">
+            <select (change)="onSelect($event.target.value)" style="height:30px;margin-top:10px" class="form-control">
+                <option [selected]="true" [value]="0" hidden selected>-Select Percentage-</option>
+                <option [selected]="config.currentSampler.samplePercentage==10" [value]="10">10%</option>
+                <option [selected]="config.currentSampler.samplePercentage==20" [value]="20">20%</option>
+                <option [selected]="config.currentSampler.samplePercentage==30" [value]="30">30%</option>
+                <option [selected]="config.currentSampler.samplePercentage==40" [value]="40">40%</option>
+                <option [selected]="config.currentSampler.samplePercentage==50" [value]="50">50%</option>
+                <option [selected]="config.currentSampler.samplePercentage==60" [value]="60">60%</option>
+                <option [selected]="config.currentSampler.samplePercentage==70" [value]="70">70%</option>
+                <option [selected]="config.currentSampler.samplePercentage==80" [value]="80">80%</option>
+                <option [selected]="config.currentSampler.samplePercentage==90" [value]="90">90%</option>
+                <option [selected]="config.currentSampler.samplePercentage==100" [value]="100">100%</option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row" *ngIf="config.currentSampler.definateOprVar">
+    <div class="col-sm-6"><label>Text</label></div>
+    <div class="col-sm-6">
+        <select class="form-control" [(ngModel)]="txt" (ngModelChange)="onCleanseSelect($event)">
+            <option [selected]="txt==f.name" *ngFor="let f of config.currentSampler.selectedVariable" [value]="f.name">{{f.name}}</option>
+        </select>
+    </div>
+</div>
+<div class="row" *ngIf="config.currentSampler.reqOprInputVarNumSelection">
+    <div><b>Select Fields To Read</b> </div>
+    <div class="row">
+        <div class="col-sm-5" style="height:100px">
+            <select multiple="multiple" #field class="form-control" style="width:100%;height:100%">
+                <option *ngFor="let f of config.currentSampler.leftVariables" [value]="f.name">{{f.name}}</option>
+            </select>
+        </div>
+        <div class="col-sm-1" style="padding-left: 0px;text-align: right;height: 100px;margin-top: 12px;">
+            <i class="material-icons hyper-link" (click)="arrowClick(true)">chevron_right</i><br />
+            <i class="material-icons hyper-link" (click)="arrowClick(false)">chevron_left</i>
+        </div>
+        <div class="col-sm-5" style="height:100px">
+            <select multiple="multiple" #selectField class="form-control" style="width:100%;height:100%">
+                <option *ngFor="let f of config.currentSampler.rightVariables" [value]="f.name">{{f.name}}</option>
+            </select>
+        </div>
+    </div>
+</div>

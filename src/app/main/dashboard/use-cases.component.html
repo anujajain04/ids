@@ -1,0 +1,32 @@
+<div>
+	<br>
+    <div  style="margin-left:13px; margin-top:-5px; height:400px">
+		<table style="table-layout:fixed;">
+			<tr>
+			    <td *ngFor="let i of dashboardList1" style="allign:center; margin:auto;">
+				    <!-- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+				    <button type="button" class="btn btn_main"
+							style="white-space:normal; text-align:center; horizontal-align:center; allign:center; width: 160px; height:80px"
+							(click)="setNewDashboard(i?.datasetName)">
+							<i class="fa fa-bar-chart" id="glyph_models" style="color:#999999;"></i>
+							<h5 class="typename">{{i?.datasetName}}</h5>
+					</button>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+			</tr>
+			<br>
+			<tr>
+			    <td *ngFor="let i of dashboardList2" style="allign:center; margin:auto;">    
+				    <button type="button" class="btn btn_main"
+							style="white-space:normal; text-align:center; horizontal-align: center; allign:center; width: 160px; height:80px"
+							(click)="setNewDashboard(i?.datasetName)">
+							<i class="fa fa-bar-chart" id="glyph_models" style="color:#999999;"></i>
+							<h5 class="typename">{{i?.datasetName}}</h5>
+					</button>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    </td>
+			</tr>
+		</table>           
+		
+	</div>	
+</div>

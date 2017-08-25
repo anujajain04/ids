@@ -1,0 +1,119 @@
+﻿<head>
+    <style>
+        b{
+            font-size:13px;
+        }
+    </style>
+    </head>
+
+
+    <form>
+
+        <div class="row">
+            <label style="font-size:15px">CREATE CHART</label>
+        </div>
+
+        <div><label><b> Step 1 : Introduction</b> </label></div>
+        <div class="row">
+            <div class="col-sm-6" style="padding-left:0px"><input type="text" class="form-control" placeholder="description" /></div>
+            <div class="col-sm-6" style="padding-left:0px"><input type="text" class="form-control" placeholder="Chart Name" /></div>
+        </div>
+        <hr />
+        <div style="margin-top: -20px;"><label> <b>Step 2 : Source</b> </label></div>
+        <div class="row">
+            <div><b>Add Source</b> :</div>
+            <div class="col-sm-6 radio-item">
+                <input type="radio" [checked]="true" value="s" [(ngModel)]="container" (change)="change()" [formControl]="complexForm.controls['file']" class="custmradio" id="optradio" name="optradio">
+                <label for="optradio">Dataset</label>
+            </div>
+            <div class="col-sm-6 radio-item">
+                <input type="radio" (change)="change()" value="e" [(ngModel)]="container" [formControl]="complexForm.controls['file']" class="custmradio" id="optradio1" name="optradio">
+                <label for="optradio1">Analysis</label>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-sm-6" style="padding-left:0px"><input type="text" class="form-control" placeholder="description" /></div>
+            <div class="col-sm-6" style="padding-left:0px"><input type="text" class="form-control" placeholder="Chart Name" /></div>
+        </div>
+
+        <hr />
+        <div class="row"style="margin-top: -20px;"><div class="col-sm-12" style="padding-left:0px;"><label> <b>Step 3 : Chart Type And Configuration</b></label></div></div>
+        <div class="row"><select class="form-control"><option>Pie Chart</option></select></div>
+
+        <div class="row">
+            <div><b>Choose Colours :</b></div>
+            <div class="col-sm-8 radio-item">
+                <input type="radio" [checked]="true" value="s" [(ngModel)]="container" (change)="change()" [formControl]="complexForm.controls['file']" class="custmradio" id="optradio23" name="optradio2">
+                <label for="optradio23">Default</label>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-10 radio-item">
+                <input type="radio" (change)="change()" value="e" [(ngModel)]="container" [formControl]="complexForm.controls['file']" class="custmradio" id="optradio12" name="optradio2">
+                <label for="optradio12">For Each Measure</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-7" style="padding-left:0px;"><label><b>Choose Colour Palate</b></label></div>
+            <div class="col-sm-5" style="padding-left:0px;margin-top:8px;"><select class="form-control"><option>Colour Palate</option></select></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6" style="padding-left:0px;"><select class="form-control"><option>Label</option></select></div>
+            <div class="col-sm-6" style="padding-left:0px;"><select class="form-control"><option>Measure</option></select></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6" style="padding-left:0px;"><select class="form-control"><option>Label</option></select></div>
+            <div class="col-sm-6" style="padding-left:0px;"><select class="form-control"><option>Measure</option></select></div>
+        </div>
+
+        <hr />
+        <div style="margin-top: -20px;"><label> <b>Step 4 : Chart Styling</b></label></div>
+        <div class="row">
+            <div class="col-sm-5" style="padding-left:0px;"><b>Add Gridlines</b> :</div>
+            <div class="col-sm-3 radio-item" style="padding-left:0px;width: 27%;padding-top: 12px;">
+                <input type="radio" [checked]="true" value="s" [(ngModel)]="container" (change)="change()" [formControl]="complexForm.controls['file']" class="custmradio" id="optradioy" name="optradiop">
+                <label for="optradioy">Yes</label>
+            </div>
+            <div class="col-sm-3 radio-item" style="padding-left:0px;width: 25%;padding-top: 12px;">
+                <input type="radio" (change)="change()" value="e" [(ngModel)]="container" [formControl]="complexForm.controls['file']" class="custmradio" id="optradion" name="optradiop">
+                <label for="optradion">No</label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-7" style="padding-left:0px"><label><b>Legend Required</b> </label></div>
+            <div class="col-sm-2" style="padding-top:10px"><input type="checkbox" checked class="form-control" /></div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6" style="padding-left:0px"><input type="text" class="form-control" placeholder="Title" /></div>
+            <div class="col-sm-6" style="padding-left:0px;"><select class="form-control"><option>Font Size</option></select></div>
+          
+        </div>
+        <div class="row">
+            <div class="col-sm-6" style="padding-left:0px;"><input type="text" class="form-control" placeholder="Font Family" /></div>
+            <div class="col-sm-6" style="padding-left:0px"><select class="form-control"><option>Colour</option></select></div>
+            
+        </div>
+        <div class="row">
+            <div class="col-sm-6" style="padding-left:0px"><select class="form-control"><option>Label</option></select></div>
+            <div class="col-sm-6" style="padding-left:0px;"><select class="form-control"><option>Measure</option></select></div>
+           
+        </div>
+
+        <div class="row">
+            <div class="col-sm-8" style="padding-left:0px;"><select class="form-control"><option>Select Colour</option></select></div>
+        </div>
+        <div class="pull-right"><button class="btn btn-success">Done</button></div>
+
+
+    </form>
+
+

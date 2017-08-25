@@ -1,0 +1,98 @@
+<div [@routerTransition] style="margin-top:-76px" [style.height.px]="height">
+    <div class="portlet-title">
+        <span class="caption-subject bold uppercase" ><b>CHART TITLE: &nbsp;</b>{{finalChart?.chartWidgetName}}</span>
+    </div>
+    <div class="row" style="background-color: #F5F5F5;margin-left:-21px">
+        <div class="col-md-7 " style="border-right:1px solid lightgray;width:65%">
+            <pie-chart *ngIf="chartNumber==3" [Stats]="chartData">Loading...</pie-chart>
+            <chord-chart *ngIf="chartNumber==2" [Stats]="chartData">Loading...</chord-chart>
+            <word-cloud *ngIf="chartNumber==1" [Stats]="chartData"></word-cloud>
+        </div>
+        <div class="col-md-3" style="padding-left:1px;width:35%">
+
+            <div class="chartdivheader">
+                <span class="chartspan">
+                    <button type="button" class="btn btn-default chartbtnheader">
+                        &nbsp; <h6 style="margin-top: -13px;"><b>About Dataset</b></h6>
+                    </button>
+                </span>
+                <br />
+
+                <div style="margin-left:54px;width:100%">
+
+                    <div class="row">
+                        <div class="col-sm-4"><label class="text-primary fntwhgtclass">Dataset Name:</label></div>
+                        <div class="col-md-7"><label style="font-size:small" class="text-info fntwhgtclass">{{gsDataset.entityName}}</label></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4"><label class="text-primary fntwhgtclass">Dataset Description:</label></div>
+                        <div class="col-md-7"><label style="font-size:small" class="text-info fntwhgtclass">{{gsDataset.entityDescription}}</label></div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-4"><label class="text-primary fntwhgtclass">Dataset Type:</label></div>
+                        <div class="col-md-7"><label style="font-size:small" class="text-info fntwhgtclass">{{gsDataset.className}}</label></div>
+                    </div>
+
+
+                </div>
+
+
+
+            </div>
+
+            <!--<br/>-->
+
+            <div class="chartdivheader">
+                <span class="chartspan">
+                    <button type="button" class="btn btn-default chartbtnheader">
+                        &nbsp; <h6 style="margin-top: -13px;"><b>About Analysis</b></h6>
+                    </button>
+                </span>
+                <br />
+
+                <div style="margin-left:54px;width:100%">
+
+
+                    <div class="row">
+                        <div class="col-sm-4"><label class="text-primary fntwhgtclass">Analysis Name:</label></div>
+                        <div class="col-md-7"><label style="font-size:small" class="text-info fntwhgtclass">{{gsAnalysis.analysisName}}</label></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4"><label class="text-primary fntwhgtclass">Analysis Description:</label></div>
+                        <div class="col-md-7"><label style="font-size:small" class="text-info fntwhgtclass">{{gsAnalysis.analysisDesc}}</label></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-4"><label class="text-primary fntwhgtclass">Analysis Type:</label></div>
+                        <div class="col-md-7"><label style="font-size:small" class="text-info fntwhgtclass">{{gsAnalysis.AnalysisType}}</label></div>
+                    </div>
+
+
+
+                </div>
+
+
+
+
+
+
+
+            </div>
+
+
+            <div>
+
+
+
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

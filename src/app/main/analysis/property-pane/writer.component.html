@@ -1,0 +1,65 @@
+﻿
+<div *ngIf="!isTemplate">
+    <div class="row">
+        <label for="rt"><b>Destination Writer Properties:</b></label>
+        <input type="text" [(ngModel)]="config.currentWriter.entityName" placeholder="Writer Name" class="form-control" />
+    </div>
+    <div class="row">
+        <div><b>Dataset : </b>{{config.currentWriter.entityName}}</div>
+    </div>
+    <!--<div class="row">
+        <div><b>Sub Dataset : </b>{{config.currentWriter.subDatasets[0]?.entityName}}</div>
+    </div>-->
+</div>
+<div>
+    <div class="row">
+        <select [(ngModel)]="txt" (ngModelChange)="onChangeObj($event)">
+            <option [selected]="t.entityKey===txt" *ngFor="let t of templateList" [ngValue]="t">{{t.entityName}}</option>
+        </select>
+    </div>
+</div>
+<!--<div class="divwritercstm">
+    <div *ngIf="config.currentWriter.reqOprInputVarNumSelection">
+        <div class="row" *ngFor="let t of config.currentWriter.selectedVariable">
+            <div class="col-sm-2">
+                <input type="checkbox" (change)="$event.target.checked?t.checked=true:t.checked=false" [checked]="t.checked" />
+            </div>
+            <div class="col-sm-4">{{t.name}}</div>
+            <div class="col-sm-4" style="padding:0px;margin-top: 8px;margin-left: 8px;">
+                <select style="width:87px;" class="form-control" [(ngModel)]="t.fieldType">
+                    <option [selected]="t.fieldType=='Continuos'" [value]="Continuos">Continuos</option>
+                    <option [selected]="t.fieldType=='Discrete'" [value]="Discrete">Discrete</option>
+                    <option [selected]="t.fieldType=='Categorical'" [value]="Categorical">Categorical</option>
+                    <option [selected]="t.fieldType=='Text'" [value]="Text">Text</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<div class="divwritercstm">
+    <table *ngIf="config.currentWriter.reqOprInputVarNumSelection" border="1">
+        <tr class="row" *ngFor="let t of config.currentWriter.selectedVariable">
+            <th class="col-sm-2">
+                <input type="checkbox" (change)="$event.target.checked?t.checked=true:t.checked=false" [checked]="t.checked" />
+            </th>
+            <th class="col-sm-4">{{t.name}}</th>
+            <th class="col-sm-4" style="padding:0px;margin-top: 8px;margin-left: 8px;text-align:right;">
+                <select style="width:87px;" class="form-control" [(ngModel)]="t.fieldType">
+                    <option [selected]="t.fieldType=='Continuos'" [value]="Continuos">Continuos</option>
+                    <option [selected]="t.fieldType=='Discrete'" [value]="Discrete">Discrete</option>
+                    <option [selected]="t.fieldType=='Categorical'" [value]="Categorical">Categorical</option>
+                    <option [selected]="t.fieldType=='Text'" [value]="Text">Text</option>
+                </select>
+            </th>
+        </tr>
+    </table>
+</div>
+<div class="row" *ngIf="config.currentWriter.definateOprVar">
+    <div class="col-sm-6"><label>Text</label></div>
+    <div class="col-sm-6">
+        <select class="form-control" [(ngModel)]="txt" (ngModelChange)="onCleanseSelect($event)">
+            <option [selected]="txt==f.name" *ngFor="let f of config.currentWriter.selectedVariable" [value]="f.name">{{f.name}}</option>
+        </select>
+    </div>
+</div>

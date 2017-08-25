@@ -1,0 +1,442 @@
+<div [@routerTransition]>
+    <div class="main-portlet">
+        <div class="portlet light portlet-fit portlet-datatable bordered">
+            <div class="portlet-title">
+                <div class="caption bold" style="margin-top: 10px;margin-bottom: -10px;">
+                    Data Channel
+                </div>
+
+                <!--<div class="row">
+                    <div class="col-md-2"></div>
+                    <ul class="nav nav-pills">
+                        <li><a href="#"><label class="numsize"><label style="color:gray">56</label><small style="color:gray">Views</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">106</label><small style="color:gray">Records</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">73</label><small style="color:gray">Edited</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">24</label><small style="color:gray">Explore</small></label></a></li>
+                        <li><a href="#"><label class="numsize"><label style="color:gray">13</label><small style="color:gray">Types</small></label></a></li>
+                    </ul>
+                </div>-->
+
+
+            </div>
+            <div class="divheader">
+                <span style="padding-left: 30px;padding-right: 20px;">
+                    <input [checked]="isAll()" (change)="selectAll($event)" type="checkbox" />
+                </span>
+
+                <div class="btn-group bootstrap-select bs-select form-control input-small" style="border-left: 1px solid gainsboro;margin-left:8px">
+                    <button type="button" class="btn dropdown-toggle white" data-toggle="dropdown" role="button" title="Create New Analysis" style="width:90px;font-size:11px">
+                        <span class="filter-option pull-left">Create</span>
+                        <span class="bs-caret"><span class="caret"></span></span>
+                    </button>
+                    <div class="dropdown-menu open" role="combobox">
+                        <ul class="dropdown-menu inner" role="listbox" aria-expanded="false">
+                            <li data-original-index="0" (click)="createDataset(i?.type)" *ngFor="let i of datatypes" class="selected" value="{{i?.type}}">
+                                <a tabindex="0" class="" data-tokens="null" role="option" aria-disabled="false" aria-selected="true">
+                                    <img [src]="i.getColorIcon()" border="0" alt="" class="smallmenuimg" /> {{i?.type}}
+
+                                    <!--<img [src]="createDataset(i?.type) ?i.getColorIcon():i.getIcon()" border="0" alt="" class="smallmenuimg" /> {{i?.type}}-->
+                                    <!--<img class="imgwidth" [src]="datasetStage==i.getNumber()? i.getColorIcon():i.getIcon()" border="0" alt="" />-->
+                                </a>
+
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+
+                <span class="headspan" *ngIf="deleteDataset?.length > 0">
+                    <button type="button" class="btn btn-default buttonheader" data-toggle="collapse" data-target="#copy" style="background-color: white;">
+                        <span class="glyphicon glyphicon-duplicate"></span> Copy
+                    </button>
+                </span>
+                <span class="headspan" *ngIf="deleteDataset?.length > 0">
+                    <button type="button" class="btn btn-default buttonheader" data-toggle="collapse" data-target="#move" style="background-color: white;">
+                        <span class="glyphicon glyphicon-log-out"></span> Move
+                    </button>
+                </span>
+                <span class="headspan" *ngIf="deleteDataset?.length > 0">
+                    <button type="button" data-toggle="collapse" data-target="#delete" class="btn btn-default buttonheader" style="background-color: white;">
+                        <span class="glyphicon glyphicon-trash"></span> Delete
+                    </button>
+                </span>
+
+
+                <span class="searchspan">
+
+                    <input class="form-control" (keyup)="filter($event.target.value)" type="text" placeholder="Search...">
+
+                </span>
+
+            </div>
+            <hr />
+
+            <!--Delete Option-->
+            <div id="delete" class="collapse out outcollapsecustm">
+
+                <div class="row">
+                    <div style="text-align:-webkit-center;"><b>Are You Sure You Want To Delete Datatset ?</b></div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span class="input-group-btn" style="float: right" data-toggle="collapse" data-target="#delete">
+                            <a href="javascript:;" class="btn btn-yellow" id="username1_checker">
+                                <i class="fa fa-times"></i> No
+                            </a>
+                        </span>
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="input-group-btn" style="float:right" (click)="yes()" data-toggle="collapse" data-target="#delete">
+                            <a href="javascript:;" class="btn btn-yellow"  id="username1_checker">
+                                <i class="fa fa-check"></i> Yes
+                            </a>
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <!--Move Option-->
+
+            <div id="move" class="collapse out outcollapsecustm">
+
+                <div class="row" style="padding-top: 12px;">
+                    <div class="col-md-4"><b>Move To Workspace :</b></div>
+                    <div class="col-sm-4">
+                        <select class="form-control" style="margin-left:13px" [(ngModel)]="selected" (ngModelChange)="selectDataset($event)">
+                            <option *ngFor="let p of workspacelist" [ngValue]="p">{{p.entityName}}</option>
+                        </select>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <span class="input-group-btn" style="float: right" data-toggle="collapse" data-target="#move">
+                            <a href="javascript:;" class="btn btn-yellow" id="username1_checker">
+                                <i class="fa fa-times"></i> No
+                            </a>
+                        </span>
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="input-group-btn" style="float:right" (click)="copymoveDataset($event)" data-toggle="collapse" data-target="#move">
+                            <a href="javascript:;" class="btn btn-yellow" id="username1_checker">
+                                <i class="fa fa-check"></i> Yes
+                            </a>
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <!--Copy Option-->
+
+            <div id="copy" class="collapse out outcollapsecustm">
+
+                <div class="row" style="padding-top: 12px;">
+                    <div class="col-md-4"><b>Copy To Workspace :</b></div>
+                    <div class="col-sm-4">
+                        <select class="form-control" style="margin-left:13px" [(ngModel)]="selected" (ngModelChange)="selectDataset($event)">
+                            <option  *ngFor="let p of workspacelist" [ngValue]="p">{{p.entityName}}</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                                <div class="row">
+                    <div class="col-sm-4">
+                        <span class="input-group-btn" style="float: right" data-toggle="collapse" data-target="#copy">
+                            <a href="javascript:;" class="btn btn-yellow" id="username1_checker">
+                                <i class="fa fa-times"></i> No
+                            </a>
+                        </span>
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="input-group-btn" style="float:right" (click)="copymoveDataset($event)" data-toggle="collapse" data-target="#copy">
+                            <a href="javascript:;" class="btn btn-yellow" id="username1_checker">
+                                <i class="fa fa-check"></i> Yes
+                            </a>
+                        </span>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+
+            <div class="listscorlbar" id="myGroup">
+                <!--<div class="loader"></div>-->
+
+                <div class="row" id="{{'focus'+sr}}" *ngFor="let i of filterdataset; let sr=index;">
+                    <div class="portlet light portlet-fit portlet-datatable bordered col-sm-2 col-md-2 col-lg-2 divportletcustm">
+                        <input type="checkbox" [checked]="deleteDataset.indexOf(i) !== -1" (change)="deletedata($event,i)" class="form-control" style="margin-top: 14px;height: 14px;" />
+                    </div>
+
+
+                    <div class="portlet light portlet-fit portlet-datatable bordered col-md-10" style="margin-left: 0px;width: 90%;height:auto;box-shadow: 0px 1px 15px 2px rgba(0, 0, 0, 0.1);">
+
+                        <div class="row">
+
+                            <div class="col-sm-3" style="width:24%"> <label><img src={{i.src}} border="0" alt="" class="smallmenuimg" /><b>{{i?.entityName}}</b> </label></div>
+
+
+                            <div class="col-sm-6 ">{{i?.entityDescription}}</div>
+                        </div>
+
+
+
+                        <div class="divheader1">
+
+                            <span class="headspan">
+                                <button data-parent="#myGroup" type="button" data-toggle="collapse" [attr.data-target]="'#'+sr+'a'" class="btn btn-default buttonheader11" (click)="getanalysislist(i.entityKey,sr)">
+                                    <!--<img src="../../../assets/global/img/Add tile black.svg" class="listicon" /> &nbsp;--><i class="fa fa-list"></i> <b style="font-size:10px">Analysis List</b>
+                                </button>
+                            </span>
+
+                            <span class="headspan">
+                                <button data-parent="#myGroup" type="button" class="btn btn-default buttonheader11" (click)="gotoanalysiscreate(i.entityKey)">
+                                    <img src="../../../assets/global/img/stock-data-analysis.svg" class="listicon" /> &nbsp; <b style="font-size:10px">Create Analysis</b>
+                                </button>
+                            </span>
+                            <span class="headspan">
+                                <button type="button" (click)="edit(i)" class="btn btn-default buttonheader11">
+                                    <!--<img src="../../../assets/global/img/Explore Dataset.svg" class="listicon" /> -->
+                                    <img src="../../../assets/global/img/edit.svg" class="listicon" /> &nbsp; <b style="font-size:10px">Edit Dataset</b>
+                                </button>
+                            </span>
+
+                            <span class="headspan">
+                                <button type="button" class="btn btn-default buttonheader11" (click)="gotoexplore(i)">
+                                    <img src="../../../assets/global/img/Explore Dataset.svg" class="listicon" /> &nbsp; <b style="font-size:10px">Explore Dataset</b>
+                                </button>
+                            </span>
+                            <span class="headspan">
+                                <button type="button" class="btn btn-default buttonheader11" (click)="viewDashboard(i?.entityName)">
+                                    <img src="../../../assets/global/img/View Dashboard.svg" class="listicon" /> &nbsp; <b style="font-size:10px">View Dashboard</b>
+                                </button>
+                            </span>
+                            <span class="headspan">
+                                <button data-parent="#myGroup" type="button" data-toggle="collapse" [attr.data-target]="'#'+sr" class="btn btn-default buttonheader11" (click)="gotohistory(i.entityKey)">
+                                    <img src="../../../assets/global/img/Dataset Details.svg" class="listicon" /> &nbsp; <b style="font-size:10px">Dataset Details</b>
+                                </button>
+                            </span>
+
+
+
+                        </div>
+
+                    </div>
+
+                    <div id="{{sr}}" class="collapse out outcollapsecustm indent">
+
+                        <div class="row">
+                            <div class="col-md-5" style="margin-top: -20px;"><label class="lblcustm"><b>Dataset Name: </b>{{i?.entityName}}</label></div>
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5" style="margin-top: -20px;"> <label class="lblcustm"><b>Created Date: </b>{{history?.dsCreateDate}}</label></div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-5" style="margin-top: -20px;"> <label class="lblcustm"><b>Modified Date: </b>{{history?.dsModifiedDate}}</label></div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5" style="margin-top: -20px;"> <label class="lblcustm"><b>Refresh Date: </b>{{history?.dsRefreshDate}}</label></div>
+                        </div>
+                    </div>
+
+
+                    <div id="{{sr+'a'}}" class="collapse out outcollapsecustm indent">
+
+                        <div class="row" style="width:100%;padding-left:113px">
+                           
+                                <div class="col-sm-4" style="width:27%;padding-right: 23px" *ngFor="let a of i.analysislist let pk=index;">
+                                    <div class="col-sm-1"></div>
+                                    <div class="portlet light" style="box-shadow: 0px 1px 8px 3px #bfbfbf;padding-left:0px;padding-right:0px;height:100px;">
+                                        <div class="row" style="background-color:lightgray">
+                                            <div class="col-sm-9" style="padding-left:0px">
+                                                <div class="col-sm-1"></div>
+                                                <div class="col-sm-1" style="padding-left:0px"></div><div class="col-sm-9" style="white-space:nowrap;margin-left:-25px;height:40px; "><label> {{a.entityName}}</label></div>
+                                            </div>
+                                            <div class="col-sm-2" [ngClass]="a.runFlag=='0'?'smallgridrunningcolor':'smallgridcompletedcolor'"><b style="font-size: 12px;color:white;margin-left: -11px;height:40px;">{{a.runFlag=="0"?"Completed":"Running"}}</b></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-2" data-toggle="modal" data-target="#myModalr" (click)="runAnalysis(a.entityKey,sr,pk)"><img class="enbl pk" src="../../../assets/global/img/small grid/Run.svg" style="height:13px" title="Run Analysis"/></div>
+                                            <div class="col-sm-2" data-toggle="modal" data-target="#myModala" (click)="abortAnalysis(a.entityKey,sr,pk)"><img class="enbl pk" src="../../../assets/global/img/small grid/Stop.svg" style="height:13px" title="Abort Analysis"/></div>
+                                            <div class="col-sm-2" data-toggle="modal" data-target="#myModale" (click)="editAnalysis(a.entityKey,i.entityKey)" ><img class="enbl pk" src="../../../assets/global/img/small grid/Edit.svg" style="height:13px" title="Edit Analysis"/></div>
+                                            <div class="col-sm-2" data-toggle="modal" data-target="#myModald" (click)="deleteAnalysis(a.entityKey,sr,pk)"><img class="enbl pk" src="../../../assets/global/img/small grid/Delete.svg" style="height:13px" title="Delete Analysis"/></div>
+                                            <div class="col-sm-2" (click)="viewChart(a.chartWidgetKey)"><img class="enbl pk" src="../../../assets/global/img/small grid/View.svg" style="height:13px" title="View Chart"/></div>
+                                            <div class="col-sm-2"><img class="enbl pk" src="../../../assets/global/img/small grid/search.svg" style="height:16px" /></div>
+                                        </div>
+                                    </div>
+
+                                <div class="container">
+
+                                    <div class="modal fade" id="myModald" role="dialog">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content" style="width:70%;margin-left:17%;text-align:center;">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Are You Sure You Want To Delete ?</h4>
+                                                </div>
+                                                <div class="modal-body listscorlbar" id="myGroup" style="height:95px;overflow-y: auto;width:287%;">
+                                                    <div class="row"><div class="col-sm-2" style="padding-left:0px"><button class="btn btn-success" style="width:50%" data-dismiss="modal">No</button></div><div class="col-sm-2" style="padding-left:0px"><button class="btn btn-success" style="width:50%" data-dismiss="modal" (click)="confirmDelete()">Yes</button></div></div>
+                                                </div>
+                                                <!--<div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal">Done</button>
+                                                </div>-->
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="modal fade" id="myModalr" role="dialog">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content" style="width:70%;margin-left:17%;text-align:center;">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">You Want To Run Analysis ?</h4>
+                                                </div>
+                                                <div class="modal-body listscorlbar" id="myGroup" style="height:95px;overflow-y: auto;width:287%;">
+                                                    <div class="row"><div class="col-sm-2" style="padding-left:0px"><button class="btn btn-success" style="width:50%" data-dismiss="modal">No</button></div><div class="col-sm-2" style="padding-left:0px"><button class="btn btn-success" style="width:50%" data-dismiss="modal" (click)="confirmRun()">Yes</button></div></div>
+                                                </div>
+                                                <!--<div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Done</button>
+                </div>-->
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="modal fade" id="myModala" role="dialog">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content" style="width:70%;margin-left:17%;text-align:center;">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Are You Sure You Want To Abort Analysis ?</h4>
+                                                </div>
+                                                <div class="modal-body listscorlbar" id="myGroup" style="height:95px;overflow-y: auto;width:287%;">
+                                                    <div class="row"><div class="col-sm-2" style="padding-left:0px"><button class="btn btn-success" style="width:50%" data-dismiss="modal">No</button></div><div class="col-sm-2" style="padding-left:0px"><button class="btn btn-success" style="width:50%" data-dismiss="modal" (click)="confirmAbort()">Yes</button></div></div>
+                                                </div>
+                                                <!--<div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Done</button>
+                </div>-->
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="modal fade" id="myModale" role="dialog">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content" style="width:70%;margin-left:17%;text-align:center;">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <h4 class="modal-title">Are You Sure You Want To Edit Analysis ?</h4>
+                                                </div>
+                                                <div class="modal-body listscorlbar" id="myGroup" style="height:95px;overflow-y: auto;width:287%;">
+                                                    <div class="row"><div class="col-sm-2" style="padding-left:0px"><button class="btn btn-success" style="width:50%" data-dismiss="modal">No</button></div><div class="col-sm-2" style="padding-left:0px"><button class="btn btn-success" style="width:50%" data-dismiss="modal" (click)="confirmEdit()">Yes</button></div></div>
+                                                </div>
+                                                <!--<div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Done</button>
+                </div>-->
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+
+
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+
+
+
+
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+
+            <div id="deleteModal" class="modal fade">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" (click)="deleteClick(false)" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Delete</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-horizontal" id='myForm'>
+                                <div class="col-md-7">
+                                    Are you sure to delete?
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div style="float:right">
+                                <button type="button" data-dismiss="modal" (click)="deleteClick(false)" class="btn btn-warning">Cancel</button>
+                                <button type="button" data-dismiss="modal" (click)="deleteClick(true)" class="btn btn-danger">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--pagination-->
+            <div class="container">
+                <ul class="pagination" style="float:right" id="pager">
+                    <li (click)="previous()"><a><i class="fa fa-angle-left fa-mid"></i></a></li>
+                    <li *ngFor="let p of arr" (click)="changePage(p)" [ngClass]="currentPage==p?'active':'disable'"><a>{{p}}</a></li>
+                    <li (click)="next()"><a><i class="fa fa-angle-right fa-mid"></i></a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>

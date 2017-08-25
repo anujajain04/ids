@@ -1,0 +1,33 @@
+<div [@routerTransition]>
+    <div class="main-portlet">
+        <div class="portlet light" style="width:95%" *ngIf="isDataset()">
+            <h4>Workspace List</h4>
+            <div class="row">
+                <br />
+                <br />
+                <table class="table table-primary">
+                    <thead style="border: 1px gray;">
+                        <tr> Workspace Name</tr>
+                        <tr>Last Modified</tr>
+                        <tr>Created By</tr>
+                        <tr>View</tr>
+                        <tr>Edit</tr>
+                        <tr> Delete</tr>
+                    </thead>
+                    <tbody *ngFor="let w of work; let i=index">
+                        <tr>
+                            <td><a href="# ">{{w}}</a></td>
+                            <td>Date Modified {{i+1}}</td>
+                            <td>John Doe {{i+1}}</td>
+                            <td><span class="glyphicon glyphicon-eye-open"></span></td>
+                            <td><span class="glyphicon glyphicon-edit"></span></td>
+                            <td><span class="glyphicon glyphicon-trash"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="col-sm-offset-11"><button (click)="change(false)" class="btn btn-primary blue">New</button></div>
+            </div>
+        </div>
+        <create-workspace (onclick)="change($event)" *ngIf="!isDataset()"> </create-workspace>
+    </div>
+</div>
